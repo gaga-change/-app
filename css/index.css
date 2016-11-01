@@ -1,5 +1,29 @@
+body {
+  padding: 0;
+  background-color: gold;
+  overflow: scroll;
+}
+header,
+.wy-container,
+footer {
+  width: 100%;
+}
+header {
+  background-color: green;
+  height: 15%;
+  position: fixed;
+  top: 0;
+}
 .wy-container {
   background-color: red;
-  padding: 0;
+  height: auto;
   margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+footer {
+  background-color: yellow;
+  height: 7.5%;
+  position: fixed;
+  bottom: 0;
 }
