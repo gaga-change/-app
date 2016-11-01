@@ -7,20 +7,19 @@ header,
 .wy-container,
 footer {
   width: 100%;
-  padding: 0 3%;
 }
 header {
-  background-color: green;
-  height: 15%;
   position: fixed;
   top: 0;
+  height: 15%;
   transition: all 1s ease;
+  background-color: #FFFFFF;
 }
 header.h-half {
   height: 7.5%;
 }
 .wy-container {
-  background-color: red;
+  background-color: #c3cdcd;
   height: auto;
   margin: 0;
   overflow: hidden;
@@ -30,6 +29,9 @@ footer {
   height: 7.5%;
   position: fixed;
   bottom: 0;
+}
+.padding-space {
+  padding: 0 5%;
 }
 .header-con {
   width: 100%;
@@ -49,7 +51,7 @@ footer {
 .header-con .header-bottom {
   height: 50%;
   transition: all 1s ease;
-  background-color: #fff;
+  background-color: #FF3333;
 }
 .header-con .i {
   display: inline-block;
@@ -78,10 +80,58 @@ footer {
   height: 100%;
 }
 .header-bottom .ul-l {
-  width: 80%;
-  background-color: #ff6f72;
+  position: relative;
+  width: 90%;
+  overflow: hidden;
 }
 .header-bottom .slide-r {
-  width: 20%;
+  width: 10%;
   background-color: yellow;
+}
+.header-bottom .shadow {
+  position: absolute;
+  height: 100%;
+  width: 0;
+}
+.header-bottom .shadow-l {
+  left: -6px;
+  box-shadow: 10px 0px 10px 10px #FF3333;
+}
+.header-bottom .shadow-r {
+  right: -4px;
+  box-shadow: -10px 0px 10px 10px #FF3333;
+}
+.ul-fa {
+  position: absolute;
+  box-sizing: content-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.ul-list {
+  box-sizing: content-box;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px;
+  white-space: nowrap;
+  text-wrap: normal;
+  overflow: scroll;
+}
+.ul-list > li {
+  display: inline-block;
+  padding: 0 2%;
+  width: auto;
+  height: 100%;
+}
+.ul-list > li > a {
+  display: block;
+  height: 100%;
+  font-size: 1.5rem;
+  color: #e6e6e6;
+}
+.ul-list > li:first-of-type {
+  margin-left: 5%;
+}
+.ul-list > li:last-of-type {
+  margin-right: 5%;
 }
