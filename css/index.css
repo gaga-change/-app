@@ -7,6 +7,7 @@ header,
 .wy-container,
 footer {
   width: 100%;
+  padding: 0 3%;
 }
 header {
   background-color: green;
@@ -22,7 +23,6 @@ header.h-half {
   background-color: red;
   height: auto;
   margin: 0;
-  padding: 0;
   overflow: hidden;
 }
 footer {
@@ -43,8 +43,13 @@ footer {
   height: 0;
   overflow: hidden;
 }
+.header-con .header-top.h-0 + .header-bottom {
+  height: 100%;
+}
 .header-con .header-bottom {
   height: 50%;
+  transition: all 1s ease;
+  background-color: #fff;
 }
 .header-con .i {
   display: inline-block;
@@ -67,4 +72,16 @@ footer {
   left: 4%;
   background: url("../img/icon-email-v2.png") center center no-repeat;
   background-size: contain;
+}
+.header-bottom > div {
+  float: left;
+  height: 100%;
+}
+.header-bottom .ul-l {
+  width: 80%;
+  background-color: #ff6f72;
+}
+.header-bottom .slide-r {
+  width: 20%;
+  background-color: yellow;
 }

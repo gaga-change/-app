@@ -8,9 +8,14 @@
   .header-top.h-0{
     height: 0;
     overflow: hidden;
+    &+.header-bottom {
+      height: 100%;
+    }
   }
   .header-bottom {
     height: 50%;
+    transition: all 1s ease;
+    background-color: #fff;
   }
   .i{
     display: inline-block;
@@ -33,5 +38,20 @@
     left: 4%;
     background: url("../img/icon-email-v2.png") center center no-repeat;
     background-size: contain;
+  }
+}
+
+.header-bottom {
+  &>div {
+    float: left;
+    height: 100%;
+  }
+  .ul-l{
+    width: 80%;
+    background-color: #ff6f72;
+  }
+  .slide-r{
+    width: 20%;
+    background-color: yellow;
   }
 }
