@@ -3,8 +3,7 @@
  */
 var app = angular.module('wyApp', [
     'ngRoute',
-    'ngAnimate',
-    'wyApp.header'
+    'ngAnimate'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
 
 }]).controller('wyCtrl', ['$scope', function ($scope) {
@@ -19,7 +18,10 @@ var app = angular.module('wyApp', [
                 windowW: $(window).width()
             };
         })
-    })
+    });
+    $scope.component = {
+        header: 'header/header.html'
+    }
 }]);
 
 $(document).ready(function () {
@@ -32,14 +34,14 @@ $(document).ready(function () {
         /**
          * 判断当前document.scrollTop
          */
-        console.log($(document).scrollTop());
-        if($(document).scrollTop() > $(window).height()*0.075){
+        if ($(document).scrollTop() > $(window).height() * 0.075) {
             $('[data-id = header]').addClass('h-half');
             $('[data-id = headerTop]').addClass('h-0');
-        }else {
+        } else {
             $('[data-id = header]').removeClass('h-half');
             $('[data-id = headerTop]').removeClass('h-0');
         }
     }
+
 
 });

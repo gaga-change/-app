@@ -37,7 +37,6 @@ footer {
 }
 .header-con .header-top {
   height: 50%;
-  background-color: #fff;
   transition: all 1s ease;
 }
 .header-con .header-top.h-0 {
@@ -46,4 +45,26 @@ footer {
 }
 .header-con .header-bottom {
   height: 50%;
+}
+.header-con .i {
+  display: inline-block;
+  height: 70%;
+  vertical-align: middle;
+}
+.header-con .p {
+  width: 6%;
+  background: url("../img/icon-personal-v2.png") center center no-repeat;
+  background-size: contain;
+}
+.header-con .l {
+  width: 78%;
+  background: url("../img/logo_2016_v2.png") center center no-repeat;
+  background-size: contain;
+}
+.header-con .e {
+  width: 6%;
+  position: relative;
+  left: 4%;
+  background: url("../img/icon-email-v2.png") center center no-repeat;
+  background-size: contain;
 }
