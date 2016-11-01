@@ -29,15 +29,16 @@ $(document).ready(function () {
      * 自动隐藏头部图标
      */
     function hideHeadTop() {
-        var h = $('[data-id = header]');
         /**
          * 判断当前document.scrollTop
          */
         console.log($(document).scrollTop());
-        if($(document).scrollTop() > $(window).height()*0.75){
-
+        if($(document).scrollTop() > $(window).height()*0.075){
+            $('[data-id = header]').addClass('h-half');
+            $('[data-id = headerTop]').addClass('h-0');
         }else {
-
+            $('[data-id = header]').removeClass('h-half');
+            $('[data-id = headerTop]').removeClass('h-0');
         }
     }
 
