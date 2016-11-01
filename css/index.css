@@ -81,12 +81,13 @@ footer {
 }
 .header-bottom .ul-l {
   position: relative;
-  width: 90%;
+  width: 93%;
   overflow: hidden;
 }
 .header-bottom .slide-r {
-  width: 10%;
-  background-color: yellow;
+  width: 7%;
+  background: url("../img/iocn-down.png") center center no-repeat;
+  background-size: contain;
 }
 .header-bottom .shadow {
   position: absolute;
