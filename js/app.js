@@ -73,10 +73,19 @@ var app = angular.module('wyApp', [
             // console.log(data.data);
             var d = data.data;
             var list = JSON.parse(data.data)[news.url];
+            //
+            list.map(function (ele, index) {
+                // console.log(ele.imgsrc);
+                var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
+                var result = re.exec(ele.imgsrc);
+                // console.log(result[1]);
+                // console.log("http://s.cimg.163.com/pi/" + result[2]);
+                ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2]+ '.270x2147483647.75.auto.webp';
+            });
             console.log(list);
             $rootScope[news.ename] = list;
             $scope.$apply(function () {
-               $scope.data = list;
+                $scope.data = list;
             })
         })
     }]);
@@ -104,12 +113,12 @@ $(document).ready(function () {
 });
 
 function getIndex(arr, obj) {
-    if(arr.length < 1)return {};
-    if(obj.length < 1)return {};
-    var re ;
-    for(var i = 0; i < arr.length; i++){
-        for(var j in obj){
-            if(obj[j] == arr[i][j])return arr[i];
+    if (arr.length < 1)return {};
+    if (obj.length < 1)return {};
+    var re;
+    for (var i = 0; i < arr.length; i++) {
+        for (var j in obj) {
+            if (obj[j] == arr[i][j])return arr[i];
         }
     }
     return {};
