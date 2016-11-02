@@ -139,9 +139,11 @@ footer {
 .item-fa {
   overflow: hidden;
 }
+.item-fa .item {
+  padding: 0 4%;
+}
 a.item-n {
   display: block;
-  border: 1px red solid;
   margin-bottom: 3%;
 }
 a.item-n .i {
@@ -151,8 +153,20 @@ a.item-n .i {
 }
 a.item-n .c {
   display: inline-block;
+  padding-left: 2%;
   width: 68%;
   vertical-align: middle;
+  color: #222;
+}
+a.item-n .c .p {
+  font-size: 1.2rem;
+}
+a.item-n .c .p,
+a.item-n .c .r {
+  color: #8e9797;
+}
+a.item-n .c .r {
+  float: right;
 }
 a.item-n h4 {
   font-size: 1.6rem;
