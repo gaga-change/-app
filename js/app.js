@@ -81,6 +81,10 @@ var app = angular.module('wyApp', [
                 var result = re.exec(ele.imgsrc);
                 // console.log(result[1]);
                 // console.log("http://s.cimg.163.com/pi/" + result[2]);
+                if(ele['imgextra']){
+                    ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2]+ '.322x2147483647.75.auto.webp'
+                    return ;
+                }
                 ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2]+ '.270x2147483647.75.auto.webp';
             });
             console.log(list);
