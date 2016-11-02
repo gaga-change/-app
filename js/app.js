@@ -3,6 +3,7 @@
  */
 var app = angular.module('wyApp', [
     'ngRoute',
+    'wyApp.ptimeFilter',
     'ngAnimate'
 ])
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
