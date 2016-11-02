@@ -93,7 +93,11 @@ var app = angular.module('wyApp', [
             $scope.$apply(function () {
                 $scope.data = list;
             })
-        })
+        });
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true
+        });
     }]);
 
 $(document).ready(function () {
