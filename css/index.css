@@ -208,6 +208,11 @@ a.item-n .c {
   width: 68%;
   vertical-align: middle;
   color: #222;
+  vertical-align: top;
+}
+a.item-n .c .h {
+  padding-top: 1%;
+  margin-bottom: 8%;
 }
 a.item-n .c .p {
   font-size: 1.2rem;
