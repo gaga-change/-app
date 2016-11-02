@@ -29,7 +29,8 @@ var app = angular.module('wyApp', [
             })
         });
         $scope.component = {
-            header: 'header/header.html'
+            header: 'header/header.html',
+            footer: 'footer/footer.html'
         };
         $scope.barList = [
             // {name : '头条'},
