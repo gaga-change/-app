@@ -1,10 +1,10 @@
-<div>
+<div class="item-fa">
 	<!--news-list-->
-	<div class="item padding-space" ng-repeat="i in data">
+	<div class="item" ng-repeat="i in data">
 		<a class="item-n" href="#" ng-if="$index != 0 && !i.imgextra">
 			<img class="i img-responsive" ng-src="{{i.imgsrc}}" alt="">
 			<div class="c">
-				<h4 class="h text-justify">{{i.title}}</h4>
+				<p class="h text-justify">{{i.title}}</p>
 				<span class="p">{{i.ptime}}</span>
 				<span class="r">{{i.replyCount}}</span>
 			</div>
