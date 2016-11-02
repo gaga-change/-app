@@ -33,4 +33,16 @@ angular.module('wyApp.ptimeFilter', [])
             }
             return "??"
         }
+    })
+    .filter('replyCount', function () {
+        return function (text) {
+            /**
+             * 如果评论条数过万的话,显示w
+             */
+            var rc = parseInt(text);
+            if(text > 10000){
+                return Math.ceil(text/10000) + 'w';
+            }
+            return text;
+        }
     });

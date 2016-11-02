@@ -6,7 +6,7 @@
 			<div class="c">
 				<p class="h text-justify">{{i.title}}</p>
 				<span class="p">{{i.ptime | ptime}}</span>
-				<span class="r"><span class="glyphicon glyphicon-edit"></span>&nbsp; {{i.replyCount}}</span>
+				<span class="r"><span class="glyphicon glyphicon-edit"></span>&nbsp; {{i.replyCount | replyCount}}</span>
 			</div>
 		</a>
 		<a class="item-m" href="#" ng-if="$index != 0 && i.imgextra">
