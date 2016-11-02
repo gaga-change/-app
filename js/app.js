@@ -10,7 +10,7 @@ var app = angular.module('wyApp', [
         $locationProvider.hashPrefix('!');
         $routeProvider
             .when('/list/:listId', {
-                templateUrl: 'content/news-list.html',
+                templateUrl: 'inc/news-list.html',
                 controller: 'newListCtrl'
             })
             .otherwise('/list/jinxuan');
@@ -29,8 +29,8 @@ var app = angular.module('wyApp', [
             })
         });
         $scope.component = {
-            header: 'header/header.html',
-            footer: 'footer/footer.html'
+            header: 'inc/header.html',
+            footer: 'inc/footer.html'
         };
         $scope.barList = [
             // {name : '头条'},
@@ -82,11 +82,11 @@ var app = angular.module('wyApp', [
                 var result = re.exec(ele.imgsrc);
                 // console.log(result[1]);
                 // console.log("http://s.cimg.163.com/pi/" + result[2]);
-                if(ele['imgextra']){
-                    ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2]+ '.322x2147483647.75.auto.webp'
-                    return ;
+                if (ele['imgextra']) {
+                    ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
+                    return;
                 }
-                ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2]+ '.270x2147483647.75.auto.webp';
+                ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
             });
             console.log(list);
             $rootScope[news.ename] = list;
@@ -98,8 +98,31 @@ var app = angular.module('wyApp', [
             pagination: '.swiper-pagination',
             paginationClickable: true
         });
-    }]);
+    }])
+    .controller('headerCtrl', ['$scope', function ($scope) {
+        /**
+         * 设置下拉按钮
+         *  点击,下拉菜单全屏
+         *      给按钮下点击事件
+         *  点击选项自动回收
+         *      给全屏div加点击事件
+         */
+        var isSlide = false;
+        $scope.slideDown = function () {
+            if(isSlide){
+                $('[data-id = slideMenu]').removeClass('bounceInDown');
+                $('[data-id = slideMenu]').addClass('bounceOutRight');
 
+            }else{
+                $('[data-id = slideMenu]').addClass('bounceInDown');
+                $('[data-id = slideMenu]').removeClass('bounceOutRight');
+            }
+            isSlide = !isSlide;
+        };
+        $scope.slideUp = function () {
+            // $('[data-id = bounceInDown]').addClass('bounceInDown');
+        }
+    }]);
 $(document).ready(function () {
     hideHeadTop();
     $(window).scroll(hideHeadTop);
