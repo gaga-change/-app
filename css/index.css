@@ -254,3 +254,41 @@ a.item-m .u li {
 .footer-ul li a.active {
   color: #FF3333;
 }
+.update-down {
+  position: relative;
+  padding: 5% 0;
+  font-size: 3rem;
+  color: rgba(255, 115, 118, 0.53);
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.update-down span {
+  position: relative;
+  display: inline-block;
+  animation-name: scroll;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-play-state: running;
+}
+@keyframes scroll {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
