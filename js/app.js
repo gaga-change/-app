@@ -1,8 +1,9 @@
 /**
  * Created by qingyun2 on 16/11/1.
  */
-var onUpdate = false;
-
+var onUpdate = false;  //是否出发新闻的追加
+var isUpdate = true; //是否完成数据的更新
+var cache = {};
 var app = angular.module('wyApp', [
     'ngRoute',
     'wyApp.ptimeFilter',
@@ -67,40 +68,93 @@ var app = angular.module('wyApp', [
             // {name: '美女'},
         ]
     }])
-    .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', function ($scope, $routeParams, $rootScope) {
-        // $scope.param = $routeParams;
-        var news = getIndex($scope.barList, {ename: $routeParams.listId});
-        var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/0-20.html";
-        console.log(url);
-        $scope.data = {};
-        $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
-            // console.log(data.data);
-            var d = data.data;
-            var list = JSON.parse(data.data)[news.url];
-            //
-            list.map(function (ele, index) {
-                // console.log(ele.imgsrc);
-                var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
-                var result = re.exec(ele.imgsrc);
-                // console.log(result[1]);
-                // console.log("http://s.cimg.163.com/pi/" + result[2]);
-                if (index == 0) {
-                    ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
-                    return;
-                } else if (ele['imgextra']) {
-                    ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
-                    return;
-                } else {
-                    ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
-                }
+    .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
+        $scope.data = [];
 
-            });
-            console.log(list);
-            $rootScope[news.ename] = list;
-            $scope.$apply(function () {
-                $scope.data = list;
-            })
-        });
+        //添加监听事件
+        var len ;
+        $interval(function () {
+            /**
+             *  追加新闻
+             *  1. onUpdate == false 没有出现在视口内
+             *      不干嘛
+             *  2. onUpdate == true  出现在视口内
+             *      判断数据是否已经是追加完成,即长度改变  isUpdate
+             *      isUpdate == false  没有追加完成
+             *          不干嘛
+             *      isUpdate == true  追加完成
+             *          更新数据
+             *          isUpdate =false
+             *
+             */
+            if(onUpdate && isUpdate){
+                getData('down')
+                isUpdate = false;
+                /**
+                 * 获取当前新闻的条数
+                 */
+                len = $('.item').length;
+            }
+            /**
+             * 判定长度变化
+             *  如果 isUpdate == false
+             *     如果 条数改变
+             *       isUpdate == true;
+             *       onUpdate == false;
+             */
+            if((!isUpdate) && (len != $('.item').length)) {
+                isUpdate = true;
+                onUpdate = false;
+            }
+        }, 10)
+
+
+        //更新当前数据  参数 为up上面  down 下面
+        function getData(updataMeth) {
+            /**
+             * 1.得到当前的新闻类别
+             * 2.得到当前新闻类别的缓存
+             * 3.更新缓存 (下拉更新  和 上划加载)
+             * 4.更新当前数据data
+             */
+            var news = getIndex($scope.barList, {ename: $routeParams.listId});
+            cache[news.ename] = cache[news.ename] || [];
+            //追加
+            if (updataMeth == 'down') {
+                /**
+                 * 根据条数获取响应的新闻
+                 */
+                d(0, 20, function (list) {
+                    $scope.data = $scope.data.concat(list);
+                })
+            }
+
+            function d(s, n, callBack) {
+                var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/" + s + "-" + n + ".html";
+                $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
+                    var d = data.data;
+                    var list = JSON.parse(data.data)[news.url];
+                    list.map(function (ele, index) {
+                        var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
+                        var result = re.exec(ele.imgsrc);
+                        if (index == 0) {
+                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
+                            return;
+                        } else if (ele['imgextra']) {
+                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
+                            return;
+                        } else {
+                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
+                        }
+                    });
+                    callBack(list);
+                });
+            }
+
+            //
+        }
+
+
         //滚动条
         var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
@@ -162,9 +216,9 @@ var scrollListen = function () {
     var _s = 0
     con.on('touchstart', function (e) {
         $('[data-id = updateUp]').removeClass('goback')
-        console.log("??? touchstart");
+        // console.log("??? touchstart");
         _y = event.targetTouches[0].pageY;
-        _s =  con.scrollTop();
+        _s = con.scrollTop();
         con.on('touchmove', touchmove);
         con.on('touchend', touchend)
     });
@@ -174,8 +228,8 @@ var scrollListen = function () {
      */
     function touchmove(event) {
         var d = event.targetTouches[0].pageY - _y - _s;
-        if(d < 1) d =0;
-        console.log(d);
+        if (d < 1) d = 0;
+        // console.log(d);
         $('[data-id = updateUp]').css({
             height: d + 'px'
         })
@@ -184,10 +238,10 @@ var scrollListen = function () {
      * 触摸结束
      */
     function touchend(event) {
-        console.log('???  end')
+        // console.log('???  end')
         $('[data-id = updateUp]').addClass('goback')
         $('[data-id = updateUp]').css({
-            height:  0
+            height: 0
         })
         con.off('touchmove', touchmove);
         con.off('touchend', touchend);
