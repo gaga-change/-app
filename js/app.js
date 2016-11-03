@@ -4,6 +4,7 @@
 var onUpdate = false;  //是否出发新闻的追加
 var isUpdate = true; //是否完成数据的更新
 var cache = {};
+var changeUpdateUpInfo; //改变下拉提示
 var app = angular.module('wyApp', [
     'ngRoute',
     'wyApp.ptimeFilter',
@@ -69,6 +70,9 @@ var app = angular.module('wyApp', [
         ]
     }])
     .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
+        onUpdate = false;
+        isUpdate = true;
+
         $scope.data = [];
 
         //添加监听事件
@@ -159,7 +163,12 @@ var app = angular.module('wyApp', [
             pagination: '.swiper-pagination',
             paginationClickable: true
         });
+        $scope.updateUpInfo = 1;
+        changeUpdateUpInfo = function (s) {
+            $scope.updateUpInfo = s;
+        }
         scrollListen();
+
     }])
     .controller('headerCtrl', ['$scope', function ($scope) {
         /**
@@ -228,6 +237,12 @@ var scrollListen = function () {
     function touchmove(event) {
         var d = event.targetTouches[0].pageY - _y - _s;
         if (d < 1) d = 0;
+        if (d > $(window).height() * 0.075) {
+            changeUpdateUpInfo(2)
+        }else {
+            changeUpdateUpInfo(1)
+        }
+
         // console.log(d);
         $('[data-id = updateUp]').css({
             height: d + 'px'
@@ -242,13 +257,11 @@ var scrollListen = function () {
         $('[data-id = updateUp]').css({
             height: 0
         })
+        changeUpdateUpInfo(1);
         con.off('touchmove', touchmove);
         con.off('touchend', touchend);
     }
 
-    /**
-     * 下拉刷新
-     */
     /**
      * 自动隐藏头部图标
      */

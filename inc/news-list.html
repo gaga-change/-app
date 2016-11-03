@@ -1,5 +1,9 @@
 <div class="item-fa">
-	<div class="update-up" data-id="updateUp"></div>
+	<div class="update-up" data-id="updateUp">
+		<span ng-if="updateUpInfo == 1"><span class="glyphicon glyphicon-gift"></span>下拉更新</span>
+		<span ng-if="updateUpInfo == 2"><span class="glyphicon glyphicon-retweet"></span>释放更新</span>
+	</div>
+
 	<!--news-list-->
 	<div class="item-c" style="height: {{size.windowW*548/1080}}px">
 	<!--<div class="item-c clearfix" style="height: auto">-->
