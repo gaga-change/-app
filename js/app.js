@@ -3,6 +3,7 @@
  */
 var onUpdate = false;  //是否出发新闻的追加
 var isUpdate = true; //是否完成数据的更新
+var startUpdate = false; //是否启动更新
 var cache = {};
 var changeUpdateUpInfo; //改变下拉提示
 var app = angular.module('wyApp', [
@@ -72,12 +73,26 @@ var app = angular.module('wyApp', [
     .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
         onUpdate = false;
         isUpdate = true;
+        startUpdate = false;
 
         $scope.data = [];
 
         //添加监听事件
         var len;
         $interval(function () {
+            /**
+             * 引擎没有启动
+             *  startUpdate == false
+             *    如果 item的条数大于6
+             *     运行引擎 startUpdate =true
+             */
+            if(!startUpdate){
+                if($('.item').length > 6){
+                    scrollListen();
+                    startUpdate = true;
+                }
+                return;
+            }
             /**
              *  追加新闻
              *  1. onUpdate == false 没有出现在视口内
@@ -110,9 +125,9 @@ var app = angular.module('wyApp', [
                 isUpdate = true;
                 onUpdate = false;
             }
+
         }, 10)
-
-
+        getData('down'); //第一次自己更新
         //更新当前数据  参数 为up上面  down 下面
         function getData(updataMeth) {
             /**
@@ -167,7 +182,7 @@ var app = angular.module('wyApp', [
         changeUpdateUpInfo = function (s) {
             $scope.updateUpInfo = s;
         }
-        scrollListen();
+
 
     }])
     .controller('headerCtrl', ['$scope', function ($scope) {
