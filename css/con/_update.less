@@ -28,8 +28,18 @@
     animation-play-state: running;
   }
 }
-//旋转的动画
 
+.update-up {
+  width: 100%;
+  height: 0;
+  background-color: yellow;
+  &.goback {
+    transition: all 1s ease;
+  }
+}
+
+
+//旋转的动画
 @keyframes scroll {
   from{
     transform: rotate(0deg);

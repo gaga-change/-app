@@ -101,10 +101,12 @@ var app = angular.module('wyApp', [
                 $scope.data = list;
             })
         });
+        //滚动条
         var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
             paginationClickable: true
         });
+        scrollListen();
     }])
     .controller('headerCtrl', ['$scope', function ($scope) {
         /**
@@ -130,10 +132,70 @@ var app = angular.module('wyApp', [
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
     }]);
-$(document).ready(function () {
+
+
+//滚动监听
+var scrollListen = function () {
     hideHeadTop();
+    updateDown();
+
     $('[data-id = wyContainer]').scroll(hideHeadTop);
     $('[data-id = wyContainer]').scroll(updateDown);
+
+
+    /**
+     * 分析
+     *  触摸点击后
+     *      当前为初始点
+     *          正常下拉移动改变样式
+     *      当前不是初始点
+     *          要等到为初始点
+     *   解决
+     *      触摸先获取con的scrollTop()的值,和初始触摸点
+     *          移动时计算差值  还要减去scrollTop()的值
+     *
+     *
+     * @type {any}
+     */
+    var con = $('[data-id = wyContainer]');
+    var _y = 0;
+    var _s = 0
+    con.on('touchstart', function (e) {
+        $('[data-id = updateUp]').removeClass('goback')
+        console.log("??? touchstart");
+        _y = event.targetTouches[0].pageY;
+        _s =  con.scrollTop();
+        con.on('touchmove', touchmove);
+        con.on('touchend', touchend)
+    });
+    /**
+     * 触摸移动
+     * @param event
+     */
+    function touchmove(event) {
+        var d = event.targetTouches[0].pageY - _y - _s;
+        if(d < 1) d =0;
+        console.log(d);
+        $('[data-id = updateUp]').css({
+            height: d + 'px'
+        })
+    };
+    /**
+     * 触摸结束
+     */
+    function touchend(event) {
+        console.log('???  end')
+        $('[data-id = updateUp]').addClass('goback')
+        $('[data-id = updateUp]').css({
+            height:  0
+        })
+        con.off('touchmove', touchmove);
+        con.off('touchend', touchend);
+    }
+
+    /**
+     * 下拉刷新
+     */
     /**
      * 自动隐藏头部图标
      */
@@ -151,22 +213,22 @@ $(document).ready(function () {
     }
 
     /**
-     * 下拉刷新
+     * 上拉刷新
      */
     function updateDown() {
         //如果正在更新中 则停止监听
-        if(onUpdate)return;
+        if (onUpdate)return;
         /**
          * 得到刷新动画相对父窗口底部的偏移
          */
         var offsize = $('[data-id = updateDown]').offset().top - $(window).height();
         // console.log(offsize);
-        if(offsize < 0 ) {
+        if (offsize < 0) {
             console.log('get data');
             onUpdate = true;
         }
     }
-});
+};
 
 /**
  * 根据参数获取具体的 一个 对象

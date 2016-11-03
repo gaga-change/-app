@@ -283,6 +283,14 @@ a.item-m .u li {
   animation-direction: normal;
   animation-play-state: running;
 }
+.update-up {
+  width: 100%;
+  height: 0;
+  background-color: yellow;
+}
+.update-up.goback {
+  transition: all 1s ease;
+}
 @keyframes scroll {
   from {
     transform: rotate(0deg);
