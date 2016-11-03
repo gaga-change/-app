@@ -72,7 +72,7 @@ var app = angular.module('wyApp', [
         $scope.data = [];
 
         //添加监听事件
-        var len ;
+        var len;
         $interval(function () {
             /**
              *  追加新闻
@@ -87,7 +87,7 @@ var app = angular.module('wyApp', [
              *          isUpdate =false
              *
              */
-            if(onUpdate && isUpdate){
+            if (onUpdate && isUpdate) {
                 getData('down')
                 isUpdate = false;
                 /**
@@ -102,7 +102,7 @@ var app = angular.module('wyApp', [
              *       isUpdate == true;
              *       onUpdate == false;
              */
-            if((!isUpdate) && (len != $('.item').length)) {
+            if ((!isUpdate) && (len != $('.item').length)) {
                 isUpdate = true;
                 onUpdate = false;
             }
@@ -124,8 +124,10 @@ var app = angular.module('wyApp', [
                 /**
                  * 根据条数获取响应的新闻
                  */
-                d(0, 20, function (list) {
-                    $scope.data = $scope.data.concat(list);
+                var s = parseInt((cache[news.ename].length) / 10) * 10;
+                d(s, 20, function (list) {
+                    cache[news.ename] = cache[news.ename].concat(list);
+                    $scope.data = cache[news.ename];
                 })
             }
 
@@ -150,10 +152,7 @@ var app = angular.module('wyApp', [
                     callBack(list);
                 });
             }
-
-            //
         }
-
 
         //滚动条
         var swiper = new Swiper('.swiper-container', {
