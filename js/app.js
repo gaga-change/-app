@@ -1,6 +1,8 @@
 /**
  * Created by qingyun2 on 16/11/1.
  */
+var onUpdate = false;
+
 var app = angular.module('wyApp', [
     'ngRoute',
     'wyApp.ptimeFilter',
@@ -128,7 +130,6 @@ var app = angular.module('wyApp', [
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
     }]);
-
 $(document).ready(function () {
     hideHeadTop();
     $('[data-id = wyContainer]').scroll(hideHeadTop);
@@ -153,18 +154,17 @@ $(document).ready(function () {
      * 下拉刷新
      */
     function updateDown() {
+        //如果正在更新中 则停止监听
+        if(onUpdate)return;
         /**
-         * 得到当期窗口的大小
-         * 获取元素的滚动偏移量
-         * 判断是否出现在窗口中,或者接近
+         * 得到刷新动画相对父窗口底部的偏移
          */
-        // var h = $(window).height();
-        var offsize = $('[data-id = updateDown]').offset();
-        // console.log(offsize)
-        // if(parseInt(h) > parseInt(offsize)) {
-        //     console.log("更新")
-        // }
-        console.log(offsize);
+        var offsize = $('[data-id = updateDown]').offset().top - $(window).height();
+        // console.log(offsize);
+        if(offsize < 0 ) {
+            console.log('get data');
+            onUpdate = true;
+        }
     }
 });
 
