@@ -131,8 +131,8 @@ var app = angular.module('wyApp', [
 
 $(document).ready(function () {
     hideHeadTop();
-    $(window).scroll(hideHeadTop);
-    $(window).scroll(updateDown);
+    $('[data-id = wyContainer]').scroll(hideHeadTop);
+    $('[data-id = wyContainer]').scroll(updateDown);
     /**
      * 自动隐藏头部图标
      */
@@ -140,7 +140,7 @@ $(document).ready(function () {
         /**
          * 判断当前document.scrollTop
          */
-        if ($(document).scrollTop() > $(window).height() * 0.075) {
+        if ($('[data-id = wyContainer]').scrollTop() > $(window).height() * 0.075) {
             $('[data-id = header]').addClass('h-half');
             $('[data-id = headerTop]').addClass('h-0');
         } else {
@@ -158,12 +158,13 @@ $(document).ready(function () {
          * 获取元素的滚动偏移量
          * 判断是否出现在窗口中,或者接近
          */
-        var h = $(window).height();
-        var offsize = $('[data-id = updateDown]').scrollTop();
-        console.log(offsize)
+        // var h = $(window).height();
+        var offsize = $('[data-id = updateDown]').offset();
+        // console.log(offsize)
         // if(parseInt(h) > parseInt(offsize)) {
         //     console.log("更新")
         // }
+        console.log(offsize);
     }
 });
 

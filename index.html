@@ -22,9 +22,10 @@
 <header data-id="header" ng-include="component.header" ng-controller="headerCtrl">
 
 </header>
-<div class="wy-container" style="padding-top: {{size.windowH*0.15}}px">
+<div class="wy-container" style="padding-top: {{size.windowH*0.15}}px;width: 100%;height: {{size.windowH}}px;overflow: scroll" data-id="wyContainer">
 	<div ng-view></div>
 </div>
+
 <!--填充底部-->
 <div class="footer-space" style="height: {{size.windowH*0.075}}px;width: 100%"></div>
 <footer class="footer-nav" ng-include="component.footer">
