@@ -82,13 +82,13 @@ var app = angular.module('wyApp', [
                 var result = re.exec(ele.imgsrc);
                 // console.log(result[1]);
                 // console.log("http://s.cimg.163.com/pi/" + result[2]);
-                if(index == 0){
+                if (index == 0) {
                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
                     return;
-                }else if (ele['imgextra']) {
+                } else if (ele['imgextra']) {
                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
                     return;
-                }else{
+                } else {
                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
                 }
 
@@ -114,11 +114,11 @@ var app = angular.module('wyApp', [
          */
         var isSlide = false;
         $scope.slideDown = function () {
-            if(isSlide){
+            if (isSlide) {
                 $('[data-id = slideMenu]').removeClass('bounceInDown');
                 $('[data-id = slideMenu]').addClass('bounceOutRight');
 
-            }else{
+            } else {
                 $('[data-id = slideMenu]').addClass('bounceInDown');
                 $('[data-id = slideMenu]').removeClass('bounceOutRight');
             }
@@ -128,9 +128,11 @@ var app = angular.module('wyApp', [
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
     }]);
+
 $(document).ready(function () {
     hideHeadTop();
     $(window).scroll(hideHeadTop);
+    $(window).scroll(updateDown);
     /**
      * 自动隐藏头部图标
      */
@@ -147,9 +149,30 @@ $(document).ready(function () {
         }
     }
 
-
+    /**
+     * 下拉刷新
+     */
+    function updateDown() {
+        /**
+         * 得到当期窗口的大小
+         * 获取元素的滚动偏移量
+         * 判断是否出现在窗口中,或者接近
+         */
+        var h = $(window).height();
+        var offsize = $('[data-id = updateDown]').scrollTop();
+        console.log(offsize)
+        // if(parseInt(h) > parseInt(offsize)) {
+        //     console.log("更新")
+        // }
+    }
 });
 
+/**
+ * 根据参数获取具体的 一个 对象
+ * @param arr   目标数组
+ * @param obj   过滤的条件
+ * @returns {*}  得到的一个 数组中的元素
+ */
 function getIndex(arr, obj) {
     if (arr.length < 1)return {};
     if (obj.length < 1)return {};
