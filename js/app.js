@@ -12,19 +12,19 @@ var app = angular.module('wyApp', [
     'ngAnimate',
     "ui.router"
 ])
-    // .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-    //     $locationProvider.hashPrefix('!');
-    //     $routeProvider
-    //         .when('/list/:listId', {
-    //             templateUrl: 'inc/news-list.html',
-    //             controller: 'newListCtrl'
-    //         })
-    //         .when('/docid/:docid', {
-    //             templateUrl: 'inc/docid.html',
-    //             controller: 'docidCtrl'
-    //         })
-    //         .otherwise('/list/jinxuan');
-    // }])
+    .run(['$rootScope', function ($rootScope) {
+
+        // 从一个状态过渡到另一个状态时触发这个事件
+        $rootScope.$on('$stateChangeStart', function (evt, next, current) {
+            // console.log(11111111111111111);
+            // console.log(evt, next, current);
+        });
+        // 过渡完成时触发这个事件
+        $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
+            // console.log(22222222222222222);
+            // console.log(evt, msg);
+        });
+    }])
     .controller('wyCtrl', ['$scope', function ($scope) {
         $scope.size = {
             windowH: $(window).height(),
@@ -74,6 +74,16 @@ var app = angular.module('wyApp', [
             {name: '彩票', ename: 'caipiao', url: 'T1356600029035'}
             // {name: '美女'},
         ]
+    }])
+    .controller('ContentCtrl', ['$scope', '$location', function ($scope, $location) {
+        //判断当前的状态,给相应的初始值
+        var dataId =  $location.url().split('/')[2];
+        $('[data-id = ' + dataId + ']').addClass('active');
+        $scope.footerBar = function (e) {
+            var t = $(e.currentTarget);
+            t.addClass('active');
+            t.siblings().removeClass('active');
+        }
     }])
     .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
         onUpdate = false;

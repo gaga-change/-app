@@ -6,7 +6,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             url: "/index",
             views: {
                 content: {
-                    templateUrl:'com/content.html'
+                    templateUrl:'com/content.html',
+                    controller: 'ContentCtrl'
                 }
             }
         }
