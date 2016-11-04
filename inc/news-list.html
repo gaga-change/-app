@@ -25,7 +25,7 @@
 		<!--<a href="#" ng-if="$index == 0">-->
 		<!--<img ng-src="{{i.imgsrc}}" alt="">-->
 		<!--</a>-->
-		<a class="item-n " href="#" ng-if="$index != 0 && !i.imgextra">
+		<a class="item-n " ng-href="#!/docid/{{i.docid}}" ng-if="$index != 0 && !i.imgextra">
 			<img class="i img-responsive" ng-src="{{i.imgsrc}}" alt="">
 			<div class="c">
 				<h4 class="h text-justify">{{i.title}}</h4>

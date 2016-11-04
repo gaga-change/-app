@@ -18,6 +18,10 @@ var app = angular.module('wyApp', [
                 templateUrl: 'inc/news-list.html',
                 controller: 'newListCtrl'
             })
+            .when('/docid/:docid', {
+                templateUrl: 'inc/docid.html',
+                controller: 'docidCtrl'
+            })
             .otherwise('/list/jinxuan');
     }])
     .controller('wyCtrl', ['$scope', function ($scope) {
@@ -86,8 +90,8 @@ var app = angular.module('wyApp', [
              *    如果 item的条数大于6
              *     运行引擎 startUpdate =true
              */
-            if(!startUpdate){
-                if($('.item').length > 6){
+            if (!startUpdate) {
+                if ($('.item').length > 6) {
                     scrollListen();
                     startUpdate = true;
                 }
@@ -208,8 +212,18 @@ var app = angular.module('wyApp', [
         $scope.slideUp = function () {
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
-    }]);
-
+    }])
+    .controller('docidCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+        $scope.content = "hello world";
+        $.post('http://localhost:8080/tools/jsonp', {url: "http://c.3g.163.com/nc/article/" + $routeParams.docid +"/full.html"}, function (data) {
+            var d = data.data;
+            console.log(d);
+            $scope.$apply(function () {
+                $scope.content = d;
+                console.log()
+            })
+        })
+    }])
 
 //滚动监听
 var scrollListen = function () {
@@ -254,7 +268,7 @@ var scrollListen = function () {
         if (d < 1) d = 0;
         if (d > $(window).height() * 0.075) {
             changeUpdateUpInfo(2)
-        }else {
+        } else {
             changeUpdateUpInfo(1)
         }
 
