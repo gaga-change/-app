@@ -9,21 +9,22 @@ var changeUpdateUpInfo; //改变下拉提示
 var app = angular.module('wyApp', [
     'ngRoute',
     'wyApp.ptimeFilter',
-    'ngAnimate'
+    'ngAnimate',
+    "ui.router"
 ])
-    .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-        $locationProvider.hashPrefix('!');
-        $routeProvider
-            .when('/list/:listId', {
-                templateUrl: 'inc/news-list.html',
-                controller: 'newListCtrl'
-            })
-            .when('/docid/:docid', {
-                templateUrl: 'inc/docid.html',
-                controller: 'docidCtrl'
-            })
-            .otherwise('/list/jinxuan');
-    }])
+    // .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    //     $locationProvider.hashPrefix('!');
+    //     $routeProvider
+    //         .when('/list/:listId', {
+    //             templateUrl: 'inc/news-list.html',
+    //             controller: 'newListCtrl'
+    //         })
+    //         .when('/docid/:docid', {
+    //             templateUrl: 'inc/docid.html',
+    //             controller: 'docidCtrl'
+    //         })
+    //         .otherwise('/list/jinxuan');
+    // }])
     .controller('wyCtrl', ['$scope', function ($scope) {
         $scope.size = {
             windowH: $(window).height(),
@@ -215,7 +216,7 @@ var app = angular.module('wyApp', [
     }])
     .controller('docidCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
         $scope.content = "hello world";
-        $.post('http://localhost:8080/tools/jsonp', {url: "http://c.3g.163.com/nc/article/" + $routeParams.docid +"/full.html"}, function (data) {
+        $.post('http://localhost:8080/tools/jsonp', {url: "http://c.3g.163.com/nc/article/" + $routeParams.docid + "/full.html"}, function (data) {
             var d = data.data;
             console.log(d);
             $scope.$apply(function () {
