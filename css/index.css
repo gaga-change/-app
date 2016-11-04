@@ -301,3 +301,29 @@ a.item-m .u li {
     transform: rotate(360deg);
   }
 }
+.com-xinwen {
+  background-color: yellow;
+}
+.com-huati {
+  background-color: #7eff6b;
+}
+.com-zhibo {
+  background-color: #3e66ff;
+}
+.com-wo {
+  background-color: #ff6ca5;
+}
+.slide-animate {
+  position: relative;
+  overflow: hidden;
+}
+.slide-animate.ng-enter {
+  position: absolute;
+  width: 100%;
+  animation: fadeInLeft 0.5s ease ;
+}
+.slide-animate.ng-leave {
+  position: absolute;
+  width: 100%;
+  animation: fadeOutRight 0.5s ease ;
+}

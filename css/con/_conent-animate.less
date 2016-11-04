@@ -1,0 +1,39 @@
+.com-xinwen {
+  background-color: yellow;
+}
+.com-huati {
+  background-color: #7eff6b;
+}
+.com-zhibo {
+  background-color: #3e66ff;
+}
+.com-wo {
+  background-color: #ff6ca5;
+}
+.slide-animate {
+  position: relative;
+  //padding:10px;
+  overflow: hidden;
+}
+
+.slide-animate.ng-enter, .slide-animate.ng-leave {
+  //transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+
+}
+.slide-animate.ng-enter {
+  position: absolute;
+  width: 100%;
+  animation:fadeInLeft 0.5s ease ;
+  //animation-name: fadeIn;
+  //top:-50px;
+}
+.slide-animate.ng-enter.ng-enter-active {
+
+}
+.slide-animate.ng-leave {
+  position: absolute;
+  width: 100%;
+  animation:fadeOutRight 0.5s ease ;
+}
+.slide-animate.ng-leave.ng-leave-active {
+}
