@@ -3,31 +3,33 @@
  */
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('index', {
-            url: "/index",
+        url: "/index",
+        cache: false,
+        views: {
+            content: {
+                templateUrl: 'com/content.html',
+                controller: 'ContentCtrl'
+            }
+        }
+    })
+        .state('index.xinwen', {
+            url: "/xinwen",
             views: {
-                content: {
-                    templateUrl: 'com/content.html',
-                    controller: 'ContentCtrl'
+                contentSon: {
+                    templateUrl: 'com/xinwen.html'
                 }
             }
-        }
-    ).state('index.xinwen', {
-        url: "/xinwen",
-        views: {
-            contentSon: {
-                templateUrl: 'com/xinwen.html'
-            }
-        }
-    }).state('index.xinwen.list', {
-        url: "/list/:newsList",
-        views: {
-            xinwenView: {
-                templateUrl: 'com/xinwen-detail.html',
-                controller: 'NewsListCtrl'
-            }
-        },
-        params: {test: 'dsa'}
-    })
+        })
+        .state('index.xinwen.list', {
+            url: "/list/:newsList",
+            views: {
+                xinwenView: {
+                    templateUrl: 'com/xinwen-list.html',
+                    controller: 'NewsListCtrl'
+                }
+            },
+            params: {test: 'dsa'}
+        })
         .state('index.wo', {
             url: "/wo",
             views: {
@@ -35,21 +37,24 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     templateUrl: 'com/wo.html'
                 }
             }
-        }).state('index.huati', {
-        url: "/huati",
-        views: {
-            contentSon: {
-                templateUrl: 'com/huati.html'
+        })
+        .state('index.huati', {
+            cache: false,
+            url: "/huati",
+            views: {
+                contentSon: {
+                    templateUrl: 'com/huati.html'
+                }
             }
-        }
-    }).state('index.zhibo', {
-        url: "/zhibo",
-        views: {
-            contentSon: {
-                templateUrl: 'com/zhibo.html'
+        })
+        .state('index.zhibo', {
+            url: "/zhibo",
+            views: {
+                contentSon: {
+                    templateUrl: 'com/zhibo.html'
+                }
             }
-        }
-    })
+        })
     //如果刚进来则默认进入 新闻 -> 精选
     // $urlRouterProvider.when('/index.xinwen', 'index/xinwen/list/jinxuan');
     // $urlRouterProvider.when('index/xinwen', 'index/xinwen/list/jinxuan');
@@ -65,9 +70,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 
         // 从一个状态过渡到另一个状态时触发这个事件
         $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-            console.log('gaga', $rootScope.lastNewsList);
+            // console.log('gaga', $rootScope.lastNewsList);
             // console.log('开始过渡');
-            console.log(evt, next, current);
+            // console.log(evt, next, current);
             // console.log('--------------')
             /**
              * 如果回滚懂新闻,或者其它也好
@@ -88,14 +93,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 
         // 过渡完成时触发这个事件
         $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
-            console.log('过渡完成');
-            console.log(evt, msg);
-            console.log('--------------')
+            // console.log('过渡完成');
+            // console.log(evt, msg);
+            // console.log('--------------')
             // $state.go('index.zhibo')
             //判断大项是否带子项
             if (msg['url'] == '/xinwen') {
                 // $state.go('index.zhibo');
-                $state.go('index.xinwen.list', {newsList:  $rootScope.lastNewsList })
+                $state.go('index.xinwen.list', {newsList: $rootScope.lastNewsList})
             }
         });
 
