@@ -75,6 +75,7 @@ var app = angular.module('wyApp', [
     }])
     .controller('NewsListCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
         var news = getIndex($scope.barList, {ename: $stateParams['newsList']});
+        console.log(news);
         $scope.news = news;
         $scope.data = [];
         getData('down'); //第一次自己更新

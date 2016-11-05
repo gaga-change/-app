@@ -54,26 +54,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     templateUrl: 'com/zhibo.html'
                 }
             }
-        })
-    //如果刚进来则默认进入 新闻 -> 精选
-    // $urlRouterProvider.when('/index.xinwen', 'index/xinwen/list/jinxuan');
-    // $urlRouterProvider.when('index/xinwen', 'index/xinwen/list/jinxuan');
-    // $urlRouterProvider.when('index.xinwen.list', 'index/xinwen/list/jinxuan');
+        });
     $urlRouterProvider.otherwise('index/xinwen/list/jinxuan');
-    // $urlRouterProvider.otherwise(function ($injector, $location) {
-    //     console.log($location);
-    //     $location.path('/index/xinwen/list/jinxuan');
-    //
-    // });
 }])
     .run(['$rootScope', '$state', function ($rootScope, $state) {
-
-        // 从一个状态过渡到另一个状态时触发这个事件
+        $rootScope.lastNewsList = 'jinxuan';
         $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-            // console.log('gaga', $rootScope.lastNewsList);
-            // console.log('开始过渡');
-            // console.log(evt, next, current);
-            // console.log('--------------')
             /**
              * 如果回滚懂新闻,或者其它也好
              *  如果滚到指定的子view
@@ -87,33 +73,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             if (current['newsList']) {
                 $rootScope.lastNewsList = current['newsList'];
             }
-
-
         });
 
         // 过渡完成时触发这个事件
         $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
-            // console.log('过渡完成');
-            // console.log(evt, msg);
-            // console.log('--------------')
-            // $state.go('index.zhibo')
             //判断大项是否带子项
             if (msg['url'] == '/xinwen') {
-                // $state.go('index.zhibo');
                 $state.go('index.xinwen.list', {newsList: $rootScope.lastNewsList})
             }
         });
-
         // 状态过渡过程中发生错误时触发, 通常是模板不能被解析或者解析promise失败时触发
         $rootScope.$on('$stateChangeError', function (evt, msg) {
-            // console.log('过渡发生错误');
-
         });
-
         // 视图开始加载时
         $rootScope.$on('$viewContentLoading', function (evt, msg) {
-            // console.log("视图加载");
-            // console.log(evt);
         });
 
     }]);
