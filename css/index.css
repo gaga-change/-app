@@ -1,12 +1,10 @@
 .index {
   position: relative;
-  background-color: #00b3ee;
 }
 .index-content-fa {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #51ff48;
 }
 .padding-space {
   padding: 0 2.5%;
@@ -43,7 +41,6 @@
   height: 100%;
 }
 .com-content .content-son {
-  background-color: #ff6f72;
   width: 100%;
   height: 82.5%;
   overflow: hidden;
@@ -77,9 +74,6 @@
   color: #a5a5a4;
   text-decoration: none;
 }
-.content-son {
-  background-color: yellow;
-}
 .slide-animate {
   position: relative;
   overflow: hidden;
@@ -110,12 +104,10 @@
   overflow: scroll;
 }
 .com-xinwen .xinwen-header {
+  position: fixed;
   width: 100%;
-  height: 16%;
   background-color: #0f0f0f;
-}
-.com-xinwen .xinwen-list {
-  background-color: #00a1d6;
+  z-index: 10;
 }
 .xinwen-header-con {
   width: 100%;
@@ -216,14 +208,14 @@
   position: absolute;
   width: 100%;
   height: 0;
-  background-color: green;
+  background-color: rgba(23, 32, 43, 0.8);
   z-index: 100;
 }
 .slide-down.bounceInDown {
-  height: 84%;
+  height: 700%;
 }
 .slide-down.bounceOutRight {
-  height: 85%;
+  height: 700%;
 }
 .item-c {
   position: relative;
