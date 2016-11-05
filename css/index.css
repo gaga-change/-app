@@ -358,3 +358,40 @@ a.item-m .u li {
     transform: rotate(360deg);
   }
 }
+.com-zhibo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #bce5ff;
+}
+.com-zhibo .zhibo-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 6%;
+  background-color: yellow;
+}
+.com-zhibo .zhibo-content {
+  height: 94%;
+  width: 100%;
+  background-color: #fcffa5;
+  overflow: scroll;
+}
+.com-zhibo .zhibo-space {
+  width: 100%;
+  height: 6%;
+}
+.zhibo-header ul {
+  width: 100%;
+  height: 100%;
+}
+.zhibo-header li {
+  height: 100%;
+  padding: 0 5%;
+  display: block;
+  float: left;
+  background-color: #79ff55;
+}
+.zhibo-header a {
+  height: 100%;
+}

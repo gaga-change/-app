@@ -155,6 +155,9 @@ var app = angular.module('wyApp', [
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
     }])
+    .controller('ZhiboCtrl', ['$scope', function ($scope) {
+
+    }])
 
 
 // .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
