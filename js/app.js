@@ -73,7 +73,37 @@ var app = angular.module('wyApp', [
             t.siblings().removeClass('active');
         }
     }])
-    .controller('NewsListCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+    .controller('NewsListCtrl', ['$scope', '$stateParams', '$interval', function ($scope, $stateParams, $interval) {
+        /*
+        * 1.监听,新闻的滚动,适当改变元素
+        * */
+        var xinwen = $('[data-id = comXinwen]');
+        var h = $('[data-id = xinwen-header]');
+        xinwen.on('scroll', scroll)
+        var interval ;
+        interval = $interval(function () {
+            // console.log('gaga')
+        },1000);
+        function scroll(e) {
+            console.log(xinwen.scrollTop());
+            //划到一定长度,自动隐藏logo
+            if(xinwen.scrollTop() > $(window).height()*0.075){
+                h.addClass('hide-half');
+            }else {
+                h.removeClass('hide-half');
+            }
+        }
+
+        /*
+        * 2.控制器撤销时,关闭一切的监听和定时器
+        * */
+        $scope.$on('$destroy', function (evt, msg) {
+            $interval.cancel(interval);
+            xinwen.off('scroll')
+        });
+         /*
+        * 数据的请求
+        * */
         var news = getIndex($scope.barList, {ename: $stateParams['newsList']});
         console.log(news);
         $scope.news = news;
