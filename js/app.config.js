@@ -19,7 +19,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             }
         }
     }).state('index.xinwen.list', {
-        url: "/list/:id",
+        url: "/list/:newsList",
         views: {
             xinwenView: {
                 templateUrl: 'com/xinwen-detail.html',
@@ -61,19 +61,42 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     //
     // });
 }])
-    .run(['$rootScope', function ($rootScope) {
+    .run(['$rootScope', '$state', function ($rootScope, $state) {
 
         // 从一个状态过渡到另一个状态时触发这个事件
         $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-
+            console.log('gaga', $rootScope.lastNewsList);
             // console.log('开始过渡');
-            // console.log(evt, next, current);
+            console.log(evt, next, current);
+            // console.log('--------------')
+            /**
+             * 如果回滚懂新闻,或者其它也好
+             *  如果滚到指定的子view
+             * 如果是新闻
+             *   带着子
+             *      则会记录新闻的子
+             *   没带子,说明是从大菜单中回来的
+             *      则跳转到上一次的子
+             */
+            //每次都记录子项
+            if (current['newsList']) {
+                $rootScope.lastNewsList = current['newsList'];
+            }
+
 
         });
 
         // 过渡完成时触发这个事件
         $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
-            // console.log('过渡完成');
+            console.log('过渡完成');
+            console.log(evt, msg);
+            console.log('--------------')
+            // $state.go('index.zhibo')
+            //判断大项是否带子项
+            if (msg['url'] == '/xinwen') {
+                // $state.go('index.zhibo');
+                $state.go('index.xinwen.list', {newsList:  $rootScope.lastNewsList })
+            }
         });
 
         // 状态过渡过程中发生错误时触发, 通常是模板不能被解析或者解析promise失败时触发
@@ -83,9 +106,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         });
 
         // 视图开始加载时
-        // $rootScope.$on('$viewContentLoading', function (evt, msg) {
-        //     console.log("视图加载");
-        //     console.log(evt);
-        // });
+        $rootScope.$on('$viewContentLoading', function (evt, msg) {
+            // console.log("视图加载");
+            // console.log(evt);
+        });
 
     }]);
