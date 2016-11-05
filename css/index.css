@@ -225,3 +225,136 @@
 .slide-down.bounceOutRight {
   height: 85%;
 }
+.item-c {
+  position: relative;
+  width: 100%;
+  background-color: #0f0f0f;
+  box-sizing: content-box;
+  margin-bottom: 3%;
+}
+.swiper-pagination {
+  text-align: right;
+}
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.item-fa {
+  overflow: hidden;
+}
+.item-fa .item {
+  padding: 0 4%;
+}
+.item-fa .item > a {
+  display: block;
+  padding-bottom: 3%;
+  margin-bottom: 3%;
+  border-bottom: 1px solid #cececd;
+}
+.item-fa h4 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+a.item-n .i {
+  display: inline-block;
+  width: 30%;
+  vertical-align: middle;
+}
+a.item-n .c {
+  display: inline-block;
+  padding-left: 2%;
+  width: 68%;
+  vertical-align: middle;
+  color: #222;
+  vertical-align: top;
+}
+a.item-n .c .h {
+  padding-top: 1%;
+  margin-bottom: 8%;
+}
+a.item-n .c .p {
+  font-size: 1.2rem;
+}
+a.item-n .c .p,
+a.item-n .c .r {
+  color: #8e9797;
+}
+a.item-n .c .r {
+  float: right;
+}
+a.item-m .h {
+  color: #222;
+  margin-bottom: 1%;
+}
+a.item-m .u li {
+  float: left;
+  width: 32%;
+  margin: 0.5%;
+}
+.update-down {
+  padding: 5% 0;
+  font-size: 3rem;
+  color: rgba(255, 115, 118, 0.53);
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.update-down span {
+  position: relative;
+  display: inline-block;
+  animation-name: scroll;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-play-state: running;
+}
+.update-up {
+  width: 100%;
+  height: 0;
+  font-size: 2rem;
+  color: rgba(45, 68, 255, 0.53);
+  text-align: center;
+}
+.update-up.goback {
+  transition: all 1s ease;
+}
+@keyframes scroll {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

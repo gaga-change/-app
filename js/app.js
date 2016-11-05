@@ -78,6 +78,11 @@ var app = angular.module('wyApp', [
         $scope.news = news;
         $scope.data = [];
         getData('down'); //第一次自己更新
+        //     //滚动条
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true
+        });
         //更新当前数据  参数 为up上面  down 下面
         function getData(updataMeth) {
             /**
@@ -150,6 +155,8 @@ var app = angular.module('wyApp', [
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
     }])
+
+
 // .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
 //     onUpdate = false;
 //     isUpdate = true;
@@ -209,11 +216,7 @@ var app = angular.module('wyApp', [
 //     }, 10)
 
 //
-//     //滚动条
-//     var swiper = new Swiper('.swiper-container', {
-//         pagination: '.swiper-pagination',
-//         paginationClickable: true
-//     });
+
 //     $scope.updateUpInfo = 1;
 //     changeUpdateUpInfo = function (s) {
 //         $scope.updateUpInfo = s;
