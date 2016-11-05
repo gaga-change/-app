@@ -12,19 +12,7 @@ var app = angular.module('wyApp', [
     'ngAnimate',
     "ui.router"
 ])
-    .run(['$rootScope', function ($rootScope) {
 
-        // 从一个状态过渡到另一个状态时触发这个事件
-        $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-            // console.log(11111111111111111);
-            // console.log(evt, next, current);
-        });
-        // 过渡完成时触发这个事件
-        $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
-            // console.log(22222222222222222);
-            // console.log(evt, msg);
-        });
-    }])
     .controller('wyCtrl', ['$scope', function ($scope) {
         $scope.size = {
             windowH: $(window).height(),
@@ -77,13 +65,21 @@ var app = angular.module('wyApp', [
     }])
     .controller('ContentCtrl', ['$scope', '$location', function ($scope, $location) {
         //判断当前的状态,给相应的初始值
-        var dataId =  $location.url().split('/')[2];
+        var dataId = $location.url().split('/')[2];
         $('[data-id = ' + dataId + ']').addClass('active');
         $scope.footerBar = function (e) {
             var t = $(e.currentTarget);
             t.addClass('active');
             t.siblings().removeClass('active');
         }
+    }])
+    .controller('NewsListCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+        $stateParams.t = $stateParams.t || 1;
+        $stateParams.t += $stateParams.t;
+        $scope.test1 = "dfsafds"
+        $scope.test = $stateParams;
+
+        console.log($stateParams);
     }])
     // .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
     //     onUpdate = false;
@@ -224,17 +220,17 @@ var app = angular.module('wyApp', [
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
     }])
-    // .controller('docidCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-    //     $scope.content = "hello world";
-    //     $.post('http://localhost:8080/tools/jsonp', {url: "http://c.3g.163.com/nc/article/" + $routeParams.docid + "/full.html"}, function (data) {
-    //         var d = data.data;
-    //         console.log(d);
-    //         $scope.$apply(function () {
-    //             $scope.content = d;
-    //             console.log()
-    //         })
-    //     })
-    // }])
+// .controller('docidCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+//     $scope.content = "hello world";
+//     $.post('http://localhost:8080/tools/jsonp', {url: "http://c.3g.163.com/nc/article/" + $routeParams.docid + "/full.html"}, function (data) {
+//         var d = data.data;
+//         console.log(d);
+//         $scope.$apply(function () {
+//             $scope.content = d;
+//             console.log()
+//         })
+//     })
+// }])
 
 //滚动监听
 var scrollListen = function () {
