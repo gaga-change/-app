@@ -23,8 +23,10 @@
 <!--<div class="wy-container" style="padding-top: {{size.windowH*0.15}}px;width: 100%;height: {{size.windowH}}px;overflow: scroll" data-id="wyContainer">-->
 	<!--<div ng-view></div>-->
 <!--</div>-->
-<ui-view name="content"></ui-view>
-<ui-view name="detail"></ui-view>
+<div class="index" style="width: 100%; height: {{size.windowH}}px;">
+	<div class="index-content-fa" ui-view name="content"></div>
+	<div class="index-detail-fa" ui-view name="detail"></div>
+</div>
 
 </body>
 <!--vendor-->

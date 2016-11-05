@@ -1,73 +1,147 @@
-body {
-  padding: 0;
-  overflow: scroll;
+.index {
+  position: relative;
+  background-color: #00b3ee;
 }
-header,
-.wy-container,
-footer {
+.index-content-fa {
+  position: relative;
   width: 100%;
-}
-header {
-  position: fixed;
-  top: 0;
-  height: 15%;
-  transition: all 1s ease;
-  background-color: #FFFFFF;
-  z-index: 1000 ;
-}
-header.h-half {
-  height: 7.5%;
-}
-.wy-container {
-  background-color: #FFFFFF;
-  height: auto;
-  margin: 0;
-  overflow: hidden;
-}
-footer {
-  height: 7.5%;
-  position: fixed;
-  bottom: 0;
+  height: 100%;
+  background-color: #51ff48;
 }
 .padding-space {
   padding: 0 2.5%;
 }
-.header-con {
+.centerCenter {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: -o-box;
+  -o-box-orient: horizontal;
+  -o-box-pack: center;
+  -o-box-align: center;
+  display: -ms-box;
+  -ms-box-orient: horizontal;
+  -ms-box-pack: center;
+  -ms-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+}
+/*
+  com-content
+    content-son
+    footer-nav
+*/
+.com-content {
   width: 100%;
   height: 100%;
 }
-.header-con .header-top {
-  height: 50%;
-  transition: all 1s ease;
-}
-.header-con .header-top.h-0 {
-  height: 0;
+.com-content .content-son {
+  background-color: #ff6f72;
+  width: 100%;
+  height: 82.5%;
   overflow: hidden;
 }
-.header-con .header-top.h-0 + .header-bottom {
+.com-content .footer-nav {
+  position: absolute;
+  width: 100%;
+  height: 7.5%;
+  bottom: 0;
+}
+.footer-ul {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #fff;
+  box-shadow: 0 -1px 2px rgba(191, 191, 191, 0.2);
+  overflow: hidden;
+}
+.footer-ul li {
+  float: left;
+  display: block;
+  width: 24%;
   height: 100%;
 }
-.header-con .header-bottom {
+.footer-ul li.active a {
+  color: #FF3333;
+}
+.footer-ul li a {
+  height: 100%;
+  color: #a5a5a4;
+  text-decoration: none;
+}
+.content-son {
+  background-color: yellow;
+}
+.slide-animate {
+  position: relative;
+  overflow: hidden;
+}
+.slide-animate.ng-enter {
+  position: absolute;
+  width: 100%;
+  animation: fadeInLeft 0.5s ease ;
+}
+.slide-animate.ng-leave {
+  position: absolute;
+  width: 100%;
+  animation: fadeOutRight 0.5s ease ;
+}
+/*
+  com-xinwen
+    xinwen-header
+      header-con
+        header-top
+        header-bottom
+        slide-down
+    xinwen-list
+
+*/
+.com-xinwen {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.com-xinwen .xinwen-header {
+  width: 100%;
+  height: 16%;
+  background-color: #0f0f0f;
+}
+.xinwen-header-con {
+  width: 100%;
+  height: 100%;
+}
+.xinwen-header-con .header-top {
+  width: 100%;
   height: 50%;
-  transition: all 1s ease;
-  background-color: #FF3333;
+  background-color: #71ff9c;
 }
-.header-con .i {
-  display: inline-block;
+.xinwen-header-con .header-bottom {
+  width: 100%;
+  height: 50%;
+  background-color: #b6b6b5;
+}
+.xinwen-header-con .i {
   height: 70%;
-  vertical-align: middle;
 }
-.header-con .p {
+.xinwen-header-con .i.p {
   width: 6%;
   background: url("../img/icon-personal-v2.png") center center no-repeat;
   background-size: contain;
 }
-.header-con .l {
+.xinwen-header-con .i.l {
   width: 78%;
   background: url("../img/logo_2016_v2.png") center center no-repeat;
   background-size: contain;
 }
-.header-con .e {
+.xinwen-header-con .i.e {
   width: 6%;
   position: relative;
   left: 4%;
@@ -136,239 +210,14 @@ footer {
   margin-right: 5%;
 }
 .slide-down {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 0;
   background-color: green;
 }
 .slide-down.bounceInDown {
-  height: 100%;
+  height: 84%;
 }
 .slide-down.bounceOutRight {
-  height: 100%;
-}
-.item-c {
-  position: relative;
-  width: 100%;
-  background-color: #0f0f0f;
-  box-sizing: content-box;
-  margin-bottom: 3%;
-}
-.swiper-pagination {
-  text-align: right;
-}
-.swiper-container {
-  width: 100%;
-  height: 100%;
-}
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-.item-fa {
-  overflow: hidden;
-}
-.item-fa .item {
-  padding: 0 4%;
-}
-.item-fa .item > a {
-  display: block;
-  padding-bottom: 3%;
-  margin-bottom: 3%;
-  border-bottom: 1px solid #cececd;
-}
-.item-fa h4 {
-  font-size: 1.6rem;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-}
-a.item-n .i {
-  display: inline-block;
-  width: 30%;
-  vertical-align: middle;
-}
-a.item-n .c {
-  display: inline-block;
-  padding-left: 2%;
-  width: 68%;
-  vertical-align: middle;
-  color: #222;
-  vertical-align: top;
-}
-a.item-n .c .h {
-  padding-top: 1%;
-  margin-bottom: 8%;
-}
-a.item-n .c .p {
-  font-size: 1.2rem;
-}
-a.item-n .c .p,
-a.item-n .c .r {
-  color: #8e9797;
-}
-a.item-n .c .r {
-  float: right;
-}
-a.item-m .h {
-  color: #222;
-  margin-bottom: 1%;
-}
-a.item-m .u li {
-  float: left;
-  width: 32%;
-  margin: 0.5%;
-}
-.footer-ul {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: 0 -1px 2px rgba(191, 191, 191, 0.2);
-  overflow: hidden;
-}
-.footer-ul li {
-  float: left;
-  display: block;
-  width: 24%;
-  height: 100%;
-}
-.footer-ul li.active a {
-  color: #FF3333;
-}
-.footer-ul li a {
-  height: 100%;
-  color: #a5a5a4;
-  text-decoration: none;
-  margin: 0px auto;
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  display: -o-box;
-  -o-box-orient: horizontal;
-  -o-box-pack: center;
-  -o-box-align: center;
-  display: -ms-box;
-  -ms-box-orient: horizontal;
-  -ms-box-pack: center;
-  -ms-box-align: center;
-  display: box;
-  box-orient: horizontal;
-  box-pack: center;
-  box-align: center;
-}
-.ttt {
-  margin: 0px auto;
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  display: -o-box;
-  -o-box-orient: horizontal;
-  -o-box-pack: center;
-  -o-box-align: center;
-  display: -ms-box;
-  -ms-box-orient: horizontal;
-  -ms-box-pack: center;
-  -ms-box-align: center;
-  display: box;
-  box-orient: horizontal;
-  box-pack: center;
-  box-align: center;
-}
-.update-down {
-  padding: 5% 0;
-  font-size: 3rem;
-  color: rgba(255, 115, 118, 0.53);
-  text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-.update-down span {
-  position: relative;
-  display: inline-block;
-  animation-name: scroll;
-  animation-duration: 1s;
-  animation-timing-function: linear;
-  animation-delay: 0s;
-  animation-iteration-count: infinite;
-  animation-direction: normal;
-  animation-play-state: running;
-}
-.update-up {
-  width: 100%;
-  height: 0;
-  font-size: 2rem;
-  color: rgba(45, 68, 255, 0.53);
-  text-align: center;
-}
-.update-up.goback {
-  transition: all 1s ease;
-}
-@keyframes scroll {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.com-xinwen {
-  background-color: yellow;
-}
-.com-huati {
-  background-color: #7eff6b;
-}
-.com-zhibo {
-  background-color: #3e66ff;
-}
-.com-wo {
-  background-color: #ff6ca5;
-}
-.slide-animate {
-  position: relative;
-  overflow: hidden;
-}
-.slide-animate.ng-enter {
-  position: absolute;
-  width: 100%;
-  animation: fadeInLeft 0.5s ease ;
-}
-.slide-animate.ng-leave {
-  position: absolute;
-  width: 100%;
-  animation: fadeOutRight 0.5s ease ;
+  height: 85%;
 }

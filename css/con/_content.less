@@ -1,0 +1,54 @@
+/*
+  com-content
+    content-son
+    footer-nav
+*/
+.com-content {
+  width: 100%;
+  height: 100%;
+  .content-son {
+    background-color: #ff6f72;
+    width: 100%;
+    height: 82.5%;
+    overflow: hidden;
+  }
+  .footer-nav {
+    position: absolute;
+    width: 100%;
+    height: 7.5%;
+    bottom: 0;
+  }
+}
+
+
+.footer-ul {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #fff;
+  //border-top: 0.1px solid #b6b6b5;
+  box-shadow: 0 -1px 2px rgba(191, 191, 191, 0.2);
+  overflow: hidden;
+  li {
+    float: left;
+    display: block;
+    width: 24%;
+    height: 100%;
+    &.active {
+      a {
+        color: #FF3333;
+      }
+    }
+    a {
+      height: 100%;
+      color: #a5a5a4;
+      text-decoration: none;
+    }
+  }
+
+}
+
+.content-son {
+  background-color: yellow;
+}

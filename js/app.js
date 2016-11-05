@@ -85,121 +85,121 @@ var app = angular.module('wyApp', [
             t.siblings().removeClass('active');
         }
     }])
-    .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
-        onUpdate = false;
-        isUpdate = true;
-        startUpdate = false;
-
-        $scope.data = [];
-
-        //添加监听事件
-        var len;
-        $interval(function () {
-            /**
-             * 引擎没有启动
-             *  startUpdate == false
-             *    如果 item的条数大于6
-             *     运行引擎 startUpdate =true
-             */
-            if (!startUpdate) {
-                if ($('.item').length > 6) {
-                    scrollListen();
-                    startUpdate = true;
-                }
-                return;
-            }
-            /**
-             *  追加新闻
-             *  1. onUpdate == false 没有出现在视口内
-             *      不干嘛
-             *  2. onUpdate == true  出现在视口内
-             *      判断数据是否已经是追加完成,即长度改变  isUpdate
-             *      isUpdate == false  没有追加完成
-             *          不干嘛
-             *      isUpdate == true  追加完成
-             *          更新数据
-             *          isUpdate =false
-             *
-             */
-            if (onUpdate && isUpdate) {
-                getData('down')
-                isUpdate = false;
-                /**
-                 * 获取当前新闻的条数
-                 */
-                len = $('.item').length;
-            }
-            /**
-             * 判定长度变化
-             *  如果 isUpdate == false
-             *     如果 条数改变
-             *       isUpdate == true;
-             *       onUpdate == false;
-             */
-            if ((!isUpdate) && (len != $('.item').length)) {
-                isUpdate = true;
-                onUpdate = false;
-            }
-
-        }, 10)
-        getData('down'); //第一次自己更新
-        //更新当前数据  参数 为up上面  down 下面
-        function getData(updataMeth) {
-            /**
-             * 1.得到当前的新闻类别
-             * 2.得到当前新闻类别的缓存
-             * 3.更新缓存 (下拉更新  和 上划加载)
-             * 4.更新当前数据data
-             */
-            var news = getIndex($scope.barList, {ename: $routeParams.listId});
-            cache[news.ename] = cache[news.ename] || [];
-            //追加
-            if (updataMeth == 'down') {
-                /**
-                 * 根据条数获取响应的新闻
-                 */
-                var s = parseInt((cache[news.ename].length) / 10) * 10;
-                d(s, 20, function (list) {
-                    cache[news.ename] = cache[news.ename].concat(list);
-                    $scope.data = cache[news.ename];
-                })
-            }
-
-            function d(s, n, callBack) {
-                var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/" + s + "-" + n + ".html";
-                $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
-                    var d = data.data;
-                    var list = JSON.parse(data.data)[news.url];
-                    list.map(function (ele, index) {
-                        var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
-                        var result = re.exec(ele.imgsrc);
-                        if (index == 0) {
-                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
-                            return;
-                        } else if (ele['imgextra']) {
-                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
-                            return;
-                        } else {
-                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
-                        }
-                    });
-                    callBack(list);
-                });
-            }
-        }
-
-        //滚动条
-        var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            paginationClickable: true
-        });
-        $scope.updateUpInfo = 1;
-        changeUpdateUpInfo = function (s) {
-            $scope.updateUpInfo = s;
-        }
-
-
-    }])
+    // .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {
+    //     onUpdate = false;
+    //     isUpdate = true;
+    //     startUpdate = false;
+    //
+    //     $scope.data = [];
+    //
+    //     //添加监听事件
+    //     var len;
+    //     $interval(function () {
+    //         /**
+    //          * 引擎没有启动
+    //          *  startUpdate == false
+    //          *    如果 item的条数大于6
+    //          *     运行引擎 startUpdate =true
+    //          */
+    //         if (!startUpdate) {
+    //             if ($('.item').length > 6) {
+    //                 scrollListen();
+    //                 startUpdate = true;
+    //             }
+    //             return;
+    //         }
+    //         /**
+    //          *  追加新闻
+    //          *  1. onUpdate == false 没有出现在视口内
+    //          *      不干嘛
+    //          *  2. onUpdate == true  出现在视口内
+    //          *      判断数据是否已经是追加完成,即长度改变  isUpdate
+    //          *      isUpdate == false  没有追加完成
+    //          *          不干嘛
+    //          *      isUpdate == true  追加完成
+    //          *          更新数据
+    //          *          isUpdate =false
+    //          *
+    //          */
+    //         if (onUpdate && isUpdate) {
+    //             getData('down')
+    //             isUpdate = false;
+    //             /**
+    //              * 获取当前新闻的条数
+    //              */
+    //             len = $('.item').length;
+    //         }
+    //         /**
+    //          * 判定长度变化
+    //          *  如果 isUpdate == false
+    //          *     如果 条数改变
+    //          *       isUpdate == true;
+    //          *       onUpdate == false;
+    //          */
+    //         if ((!isUpdate) && (len != $('.item').length)) {
+    //             isUpdate = true;
+    //             onUpdate = false;
+    //         }
+    //
+    //     }, 10)
+    //     getData('down'); //第一次自己更新
+    //     //更新当前数据  参数 为up上面  down 下面
+    //     function getData(updataMeth) {
+    //         /**
+    //          * 1.得到当前的新闻类别
+    //          * 2.得到当前新闻类别的缓存
+    //          * 3.更新缓存 (下拉更新  和 上划加载)
+    //          * 4.更新当前数据data
+    //          */
+    //         var news = getIndex($scope.barList, {ename: $routeParams.listId});
+    //         cache[news.ename] = cache[news.ename] || [];
+    //         //追加
+    //         if (updataMeth == 'down') {
+    //             /**
+    //              * 根据条数获取响应的新闻
+    //              */
+    //             var s = parseInt((cache[news.ename].length) / 10) * 10;
+    //             d(s, 20, function (list) {
+    //                 cache[news.ename] = cache[news.ename].concat(list);
+    //                 $scope.data = cache[news.ename];
+    //             })
+    //         }
+    //
+    //         function d(s, n, callBack) {
+    //             var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/" + s + "-" + n + ".html";
+    //             $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
+    //                 var d = data.data;
+    //                 var list = JSON.parse(data.data)[news.url];
+    //                 list.map(function (ele, index) {
+    //                     var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
+    //                     var result = re.exec(ele.imgsrc);
+    //                     if (index == 0) {
+    //                         ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
+    //                         return;
+    //                     } else if (ele['imgextra']) {
+    //                         ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
+    //                         return;
+    //                     } else {
+    //                         ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
+    //                     }
+    //                 });
+    //                 callBack(list);
+    //             });
+    //         }
+    //     }
+    //
+    //     //滚动条
+    //     var swiper = new Swiper('.swiper-container', {
+    //         pagination: '.swiper-pagination',
+    //         paginationClickable: true
+    //     });
+    //     $scope.updateUpInfo = 1;
+    //     changeUpdateUpInfo = function (s) {
+    //         $scope.updateUpInfo = s;
+    //     }
+    //
+    //
+    // }])
     .controller('headerCtrl', ['$scope', function ($scope) {
         /**
          * 设置下拉按钮
@@ -224,17 +224,17 @@ var app = angular.module('wyApp', [
             // $('[data-id = bounceInDown]').addClass('bounceInDown');
         }
     }])
-    .controller('docidCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-        $scope.content = "hello world";
-        $.post('http://localhost:8080/tools/jsonp', {url: "http://c.3g.163.com/nc/article/" + $routeParams.docid + "/full.html"}, function (data) {
-            var d = data.data;
-            console.log(d);
-            $scope.$apply(function () {
-                $scope.content = d;
-                console.log()
-            })
-        })
-    }])
+    // .controller('docidCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+    //     $scope.content = "hello world";
+    //     $.post('http://localhost:8080/tools/jsonp', {url: "http://c.3g.163.com/nc/article/" + $routeParams.docid + "/full.html"}, function (data) {
+    //         var d = data.data;
+    //         console.log(d);
+    //         $scope.$apply(function () {
+    //             $scope.content = d;
+    //             console.log()
+    //         })
+    //     })
+    // }])
 
 //滚动监听
 var scrollListen = function () {
