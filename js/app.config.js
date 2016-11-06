@@ -35,6 +35,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         },
         params: {test: 1, id: 2}
     };
+    var xinwenDetail = {
+        name: 'index.xinwen.list.detail',
+        url: '/:docid',
+        views: {
+            xinwenDetail: {
+                templateUrl: 'com/xinwen-detail.html',
+                controller: 'XinwenDetailCtrl'
+            }
+        },
+        params: {test: 1, id: 2}
+    }
     var zhibo = {
         name: 'index.zhibo',
         url: '/zhibo',
@@ -73,52 +84,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     $stateProvider.state(huati);
     $stateProvider.state(wo);
     $stateProvider.state(newsList);
-
+    $stateProvider.state(xinwenDetail);
     $urlRouterProvider.otherwise('index/xinwen/jinxuan');
-
-    // .state('index.xinwen', {
-    //     url: "/xinwen",
-    //     views: {
-    //         contentSon: {
-    //             templateUrl: 'com/xinwen.html',
-    //             controller: 'XinwenCtrl'
-    //         }
-    //     }
-    // })
-
-    // .state('index.xinwen.list.gaga', {
-    //     url: "/:docid",
-    //     views: {
-    //         xinwenDetail: {
-    //             templateUrl: 'com/xinwen-detail.html'
-    //         }
-    //     }
-    // })
-    // .state('index.wo', {
-    //     url: "/wo",
-    //     views: {
-    //         contentSon: {
-    //             templateUrl: 'com/wo.html'
-    //         }
-    //     }
-    // })
-    // .state('index.huati', {
-    //     cache: false,
-    //     url: "/huati",
-    //     views: {
-    //         contentSon: {
-    //             templateUrl: 'com/huati.html'
-    //         }
-    //     }
-    // })
-    // .state('index.zhibo', {
-    //     url: "/zhibo",
-    //     views: {
-    //         contentSon: {
-    //             templateUrl: 'com/zhibo.html'
-    //         }
-    //     }
-    // });
 }])
     .run(['$rootScope', '$state', function ($rootScope, $state) {
         $rootScope.lastNewsList = 'jinxuan';

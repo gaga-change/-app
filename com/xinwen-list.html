@@ -16,7 +16,8 @@
 		<!--其它-->
 		<div class="item" ng-repeat="i in data">
 			<!--单张小图新闻-->
-			<a class="item-n " style="cursor: pointer" ng-click="showDetail(i.docid)" ng-if="$index != 0 && !i.imgextra">
+			<!--<a class="item-n " style="cursor: pointer" ui-sref="" ng-if="$index != 0 && !i.imgextra">-->
+			<a class="item-n " style="cursor: pointer" href="#/index/xinwen/{{news.ename}}/{{i.docid}}" ng-if="$index != 0 && !i.imgextra">
 				<img class="i img-responsive" ng-src="{{i.imgsrc}}" alt="">
 				<div class="c">
 					<h4 class="h text-justify">{{i.title}}</h4>
@@ -26,7 +27,7 @@
 				</div>
 			</a>
 			<!--三张小图新闻-->
-			<a class="item-m " ng-click="showDetail()"  ng-if="$index != 0 && i.imgextra">
+			<a class="item-m " href="#/index/xinwen/{{news.ename}}/{{i.docid}}"  ng-if="$index != 0 && i.imgextra">
 				<h4 class="h text-justify">{{i.title}}</h4>
 				<ul class="u list-unstyled clearfix">
 					<li>
@@ -43,6 +44,7 @@
 		</div>
 	</div>
 </div>
+<div ui-view name="xinwenDetail"></div>
 <!--<div class="item-fa">-->
 	<!--<div class="update-up" data-id="updateUp">-->
 		<!--<span ng-if="updateUpInfo == 1"><span class="glyphicon glyphicon-gift"></span>下拉更新</span>-->

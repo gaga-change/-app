@@ -165,6 +165,43 @@ var app = angular.module('wyApp', [
         }
     }])
 
+    .controller('XinwenDetailCtrl', ['$scope', '$stateParams', '$sce', function ($scope, $stateParams, $sce) {
+        console.log('detail', $stateParams);
+        $scope.xinwenDetailData = [];
+        // http://c.m.163.com/nc/article/C51TJCSH000181BT/full.html
+        var url = 'http://c.m.163.com/nc/article/' + $stateParams['docid'] + '/full.html';
+        $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
+            var d = data.data;
+            d = JSON.parse(d)[$stateParams['docid']]
+            var body = d['body'];
+            var imgArr = d['img'];
+            var replyCount = d['replyCount'];
+            /**
+             * 切除
+             */
+            var re = new RegExp(/(\<!--IMG#\d--\>)/, 'g')
+            var i = 0;
+            body = body.replace(re, function (a, b) {
+                var r;
+                imgArr.map(function (ele, index) {
+                    if (ele.ref == a) {
+                        r = ele.src;
+                    }
+                })
+                r = "<img src=" + r + ">";
+                // console.log(r);
+                return r;
+            })
+            // d = d[$stateParams['docid']]
+            // console.log(body);
+            $scope.$apply(function () {
+                $scope.xinwenDetailData = $sce.trustAsHtml(body);
+            })
+        })
+
+
+    }])
+
     .controller('ZhiboCtrl', ['$scope', function ($scope) {
     }])
 
