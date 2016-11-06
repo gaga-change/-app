@@ -74,7 +74,7 @@ var app = angular.module('wyApp', [
     }])
 
     .controller('XinwenListCtrl', ['$interval', '$rootScope', '$stateParams', '$scope', function ($interval, $rootScope, $stateParams, $scope) {
-
+        if(!$stateParams['xinwenList'])return;
         /*
          * 1.监听,新闻的滚动,适当改变元素
          * */

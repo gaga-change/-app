@@ -101,17 +101,18 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
              */
             // console.log('next', evt, next, current, $state);
             //每次都记录子项
-            if (current['newsList']) {
-                $rootScope.lastNewsList = current['newsList'];
+            if (current['xinwenList']) {
+                $rootScope.lastNewsList = current['xinwenList'];
             }
         });
 
         // 过渡完成时触发这个事件
         $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
             //判断大项是否带子项
-            // if (msg['url'] == '/xinwen') {
-            //     $state.go('index.xinwen.list', {newsList: $rootScope.lastNewsList})
-            // }
+            // console.log( 'msg',msg);
+            if (msg['url'] == '/xinwen') {
+                $state.go('index.xinwen.list', {xinwenList: $rootScope.lastNewsList})
+            }
         });
         // 状态过渡过程中发生错误时触发, 通常是模板不能被解析或者解析promise失败时触发
         $rootScope.$on('$stateChangeError', function (evt, msg) {
