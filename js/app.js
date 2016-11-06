@@ -290,11 +290,42 @@ var app = angular.module('wyApp', [
         $scope.huatiHeader = 'com/huati-header.html'
     }])
 
-    .controller('HuatiListCtrl', ['$scope', function ($scope) {
-
+    .controller('HuatiListCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+        // http://c.3g.163.com/newstopic/list/expert/5bmz6aG25bGx/10-10.html
+        var zhiboArr = [
+            {name: 'wenba', url: '5bmz6aG25bGx', vname: 'expertList'}
+        ];
+        // console.log($stateParams);
+        var zb = getIndex(zhiboArr, {name: $stateParams['huatiList']});
+        $scope.data = [];
+        getZhiboData('down')
+        /**
+         * 获取数据
+         */
+        function getZhiboData(dir) {
+            if (dir == 'down') {
+                var url = 'http://c.3g.163.com/newstopic/list/expert/' + zb.url + '/0-10.html';
+                $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
+                    // console.log(data.data);
+                    var d = JSON.parse(data.data);
+                    var list = d.data[zb.vname];
+                    console.log(list);
+                    // list.map(function (ele, index) {
+                    //     var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
+                    //     var result = re.exec(ele.image);
+                    //     // if(result[2] == null) return;
+                    //     ele.image = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
+                    // });
+                    $scope.$apply(function () {
+                        $scope.data = list;
+                    })
+                })
+            }
+        }
     }])
 
-    .controller('HuatiHeaderCtrl', ['$scope', function ($scope) {
+    .controller('HuatiHeaderCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+
     }])
 
     .controller('WoCtrl', ['$scope', function ($scope) {
