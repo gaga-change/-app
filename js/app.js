@@ -73,7 +73,8 @@ var app = angular.module('wyApp', [
 
     }])
 
-    .controller('XinwenListCtrl', ['$interval', '$stateParams', '$scope', function ($scope, $interval, $stateParams) {
+    .controller('XinwenListCtrl', ['$interval', '$rootScope', '$stateParams', '$scope', function ($interval, $rootScope, $stateParams, $scope) {
+
         /*
          * 1.监听,新闻的滚动,适当改变元素
          * */
@@ -104,64 +105,64 @@ var app = angular.module('wyApp', [
         /*
          * 数据的请求
          * */
-        console.log($stateParams)
-        // var news = getIndex($scope.barList, {ename: $stateParams['xinwenList']});
-        // console.log(news);
-        // $scope.news = news;
-        // $scope.data = [];
-        // getData('down'); //第一次自己更新
+        var news = getIndex($scope.barList, {ename: $stateParams['xinwenList']});
+        console.log(news);
+
+        $scope.news = news;
+        $scope.data = [];
+        getData('down'); //第一次自己更新
         //     //滚动条
         // var swiper = new Swiper('.swiper-container', {
         //     pagination: '.swiper-pagination',
         //     paginationClickable: true
         // });
         //更新当前数据  参数 为up上面  down 下面
-        // function getData(updataMeth) {
-        //     /**
-        //      * 1.得到当前的新闻类别
-        //      * 2.得到当前新闻类别的缓存
-        //      * 3.更新缓存 (下拉更新  和 上划加载)
-        //      * 4.更新当前数据data
-        //      */
-        //     cache[news.ename] = cache[news.ename] || [];
-        //     //追加
-        //     if (updataMeth == 'down') {
-        //         /**
-        //          * 根据条数获取响应的新闻
-        //          */
-        //         // var s = parseInt((cache[news.ename].length) / 10) * 10;
-        //         d(0, 20, function (list) {
-        //             cache[news.ename] = cache[news.ename].concat(list);
-        //             // console.log($scope.data)
-        //             $scope.$apply(function () {
-        //                 $scope.data = cache[news.ename];
-        //             })
-        //         })
-        //     }
-        //     function d(s, n, callBack) {
-        //         var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/" + s + "-" + n + ".html";
-        //         $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
-        //             var d = data.data;
-        //             var list = JSON.parse(data.data)[news.url];
-        //             console.log('post获取的数据', list)
-        //             list.map(function (ele, index) {
-        //                 var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
-        //                 var result = re.exec(ele.imgsrc);
-        //                 // if(result[2] == null) return;
-        //                 if (index == 0) {
-        //                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
-        //                     return;
-        //                 } else if (ele['imgextra']) {
-        //                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
-        //                     return;
-        //                 } else {
-        //                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
-        //                 }
-        //             });
-        //             callBack(list);
-        //         });
-        //     }
-        // }
+        function getData(updataMeth) {
+            /**
+             * 1.得到当前的新闻类别
+             * 2.得到当前新闻类别的缓存
+             * 3.更新缓存 (下拉更新  和 上划加载)
+             * 4.更新当前数据data
+             */
+            cache[news.ename] = cache[news.ename] || [];
+            //追加
+            if (updataMeth == 'down') {
+                /**
+                 * 根据条数获取响应的新闻
+                 */
+                // var s = parseInt((cache[news.ename].length) / 10) * 10;
+                d(0, 20, function (list) {
+                    cache[news.ename] = cache[news.ename].concat(list);
+                    // console.log($scope.data)
+                    $scope.$apply(function () {
+                        $scope.data = cache[news.ename];
+                    })
+                })
+            }
+            function d(s, n, callBack) {
+                var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/" + s + "-" + n + ".html";
+                $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
+                    var d = data.data;
+                    var list = JSON.parse(data.data)[news.url];
+                    console.log('post获取的数据', list)
+                    list.map(function (ele, index) {
+                        var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
+                        var result = re.exec(ele.imgsrc);
+                        // if(result[2] == null) return;
+                        if (index == 0) {
+                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
+                            return;
+                        } else if (ele['imgextra']) {
+                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
+                            return;
+                        } else {
+                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
+                        }
+                    });
+                    callBack(list);
+                });
+            }
+        }
     }])
 
     .controller('ZhiboCtrl', ['$scope', function ($scope) {

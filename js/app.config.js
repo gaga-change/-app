@@ -26,14 +26,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     };
     var newsList = {
         name: 'index.xinwen.list',
-        url: '/list/:xinwenList',
+        url: '/:xinwenList',
         views: {
             newsList: {
                 templateUrl: 'com/xinwen-list.html',
                 controller: 'XinwenListCtrl'
             }
         },
-        params: {test : 1}
+        params: {test: 1, id: 2}
     };
     var zhibo = {
         name: 'index.zhibo',
@@ -74,7 +74,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     $stateProvider.state(wo);
     $stateProvider.state(newsList);
 
-    $urlRouterProvider.otherwise('index/xinwen/list/jinxuan');
+    $urlRouterProvider.otherwise('index/xinwen/jinxuan');
 
     // .state('index.xinwen', {
     //     url: "/xinwen",
@@ -120,37 +120,37 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     //     }
     // });
 }])
-.run(['$rootScope', '$state', function ($rootScope, $state) {
-    $rootScope.lastNewsList = 'jinxuan';
-    $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-        /**
-         * 如果回滚懂新闻,或者其它也好
-         *  如果滚到指定的子view
-         * 如果是新闻
-         *   带着子
-         *      则会记录新闻的子
-         *   没带子,说明是从大菜单中回来的
-         *      则跳转到上一次的子
-         */
-        console.log('next', evt,next,current,$state);
-        //每次都记录子项
-        if (current['newsList']) {
-            $rootScope.lastNewsList = current['newsList'];
-        }
-    });
+    .run(['$rootScope', '$state', function ($rootScope, $state) {
+        $rootScope.lastNewsList = 'jinxuan';
+        $rootScope.$on('$stateChangeStart', function (evt, next, current) {
+            /**
+             * 如果回滚懂新闻,或者其它也好
+             *  如果滚到指定的子view
+             * 如果是新闻
+             *   带着子
+             *      则会记录新闻的子
+             *   没带子,说明是从大菜单中回来的
+             *      则跳转到上一次的子
+             */
+            // console.log('next', evt, next, current, $state);
+            //每次都记录子项
+            if (current['newsList']) {
+                $rootScope.lastNewsList = current['newsList'];
+            }
+        });
 
-    // 过渡完成时触发这个事件
-    $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
-        //判断大项是否带子项
-        if (msg['url'] == '/xinwen') {
-            $state.go('index.xinwen.list', {newsList: $rootScope.lastNewsList})
-        }
-    });
-    // 状态过渡过程中发生错误时触发, 通常是模板不能被解析或者解析promise失败时触发
-    $rootScope.$on('$stateChangeError', function (evt, msg) {
-    });
-    // 视图开始加载时
-    $rootScope.$on('$viewContentLoading', function (evt, msg) {
-    });
+        // 过渡完成时触发这个事件
+        $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
+            //判断大项是否带子项
+            // if (msg['url'] == '/xinwen') {
+            //     $state.go('index.xinwen.list', {newsList: $rootScope.lastNewsList})
+            // }
+        });
+        // 状态过渡过程中发生错误时触发, 通常是模板不能被解析或者解析promise失败时触发
+        $rootScope.$on('$stateChangeError', function (evt, msg) {
+        });
+        // 视图开始加载时
+        $rootScope.$on('$viewContentLoading', function (evt, msg) {
+        });
 
-}]);
+    }]);
