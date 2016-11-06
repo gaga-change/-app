@@ -1,32 +1,9 @@
-<div class="com-xinwen" data-id="comXinwen">
-	<div style="height:{{size.windowH*0.15}}px; width: 100%" ></div>
-	<header class="xinwen-header " data-id="xinwen-header" style="height:{{size.windowH*0.15}}px">
-		<div class="xinwen-header-con">
-			<div class="header-top padding-space centerCenter" data-id="headerTop">
-				<div class="i p "></div>
-				<div class="i l "></div>
-				<div class="i e "></div>
-			</div>
-			<div class="header-bottom padding-space">
-				<div class="ul-l">
-					<div class="ul-fa">
-						<ul class="ul-list list-unstyled">
-							<li ng-repeat="i in barList">
-								<a href="#/index/xinwen/list/{{i.ename}}" style="line-height: {{size.windowH*0.075}}px">{{i.name}}</a>
-							</li>
-						</ul>
-					</div>
-					<div class="shadow shadow-l"></div>
-					<div class="shadow shadow-r"></div>
-				</div>
-				<div class="slide-r" ng-click="slideDown()">
-				</div>
-			</div>
-		</div>
-		<div class="slide-down  animated" data-id="slideMenu"></div>
-	</header>
-	<div class="xinwen-list slide-animate" ui-view name="xinwenView"></div>
-	<!--<div class="xinwen-detail slide-animate" ui-view name="xinwenDetail"></div>-->
-	<!--<div class="xinwen-detail" ng-if="detailShow" ng-include="xinwenDetailUrl"></div>-->
+<!--<div class="com-xinwen" data-id="comXinwen">-->
+	<!--<div style="height:{{size.windowH*0.15}}px; width: 100%" ></div>-->
+	<!--<div class="xinwen-list slide-animate" ui-view name="xinwenView"></div>-->
+	<!--&lt;!&ndash;<div class="xinwen-detail slide-animate" ui-view name="xinwenDetail"></div>&ndash;&gt;-->
+	<!--&lt;!&ndash;<div class="xinwen-detail" ng-if="detailShow" ng-include="xinwenDetailUrl"></div>&ndash;&gt;-->
 
-</div>
+<!--</div>-->
+<div class="news-list" ui-view name="newsList"></div>
+<div class="xinwen-header" ng-include="xinwenHeader" ng-controller="XinwenHeaderCtrl"></div>

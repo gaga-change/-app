@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="" ng-app="wyApp" ng-cloak >
+<html class="no-js" ng-app="wyApp" lang="" ng-cloak >
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -14,16 +14,11 @@
 	<link rel="stylesheet" href="css/index.css">
 	<script src="js/vendor/wow.min.js"></script>
 </head>
-<body ng-controller="wyCtrl">
+<body >
 <!--[if lt IE 8]>
 <p class="text-center text-muted ">您使用的浏览器版本 <strong>过旧</strong>。<a href="http://browsehappy.com/">点此升级</a></p>
 <![endif]-->
-
-<div class="index" style="width: 100%; height: {{size.windowH}}px;">
-	<div class="index-content-fa" ui-view name="content"></div>
-	<div class="index-detail-fa" ui-view name="detail"></div>
-</div>
-
+	<div ui-view name="content"></div>
 </body>
 <!--vendor-->
 <!--<script src="js/vendor/less.min.js"></script>-->

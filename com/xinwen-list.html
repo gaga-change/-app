@@ -1,57 +1,61 @@
-<div class="item-fa">
-	<div class="update-up" data-id="updateUp">
-		<span ng-if="updateUpInfo == 1"><span class="glyphicon glyphicon-gift"></span>下拉更新</span>
-		<span ng-if="updateUpInfo == 2"><span class="glyphicon glyphicon-retweet"></span>释放更新</span>
-	</div>
+<div class="xinwen-list">
+	<!--补白-->
+	<div class="xinwen-space" style="width: 100%; height: {{size.windowH*0.15}}px"></div>
+	gagdsa
+	<!--遍历 所有新闻-->
+	<!--<div class="item-fa">-->
+		<!--&lt;!&ndash;大图&ndash;&gt;-->
+		<!--<div class="item-c" style="height: {{size.windowW*548/1080}}px">-->
+			<!--<div class="swiper-container">-->
+				<!--<div class="swiper-wrapper">-->
+					<!--<img class="swiper-slide"  ng-src="{{data[0].imgsrc}}" alt="">-->
+					<!--<img class="swiper-slide"  ng-src="{{data[0].imgsrc}}" alt="">-->
+				<!--</div>-->
+				<!--<div class="swiper-pagination "></div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--&lt;!&ndash;其它&ndash;&gt;-->
+		<!--<div class="item" ng-repeat="i in data">-->
+			<!--&lt;!&ndash;单张小图新闻&ndash;&gt;-->
+			<!--<a class="item-n " style="cursor: pointer" ng-click="showDetail(i.docid)" ng-if="$index != 0 && !i.imgextra">-->
+				<!--<img class="i img-responsive" ng-src="{{i.imgsrc}}" alt="">-->
+				<!--<div class="c">-->
+					<!--<h4 class="h text-justify">{{i.title}}</h4>-->
+					<!--<span class="p">{{i.ptime | ptime}}</span>-->
+					<!--<span class="r"><span-->
+							<!--class="glyphicon glyphicon-edit"></span>&nbsp; {{i.replyCount | replyCount}}</span>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--&lt;!&ndash;三张小图新闻&ndash;&gt;-->
+			<!--<a class="item-m " ng-click="showDetail()"  ng-if="$index != 0 && i.imgextra">-->
+				<!--<h4 class="h text-justify">{{i.title}}</h4>-->
+				<!--<ul class="u list-unstyled clearfix">-->
+					<!--<li>-->
+						<!--<img class=" img-responsive" ng-src="{{i.imgsrc}}" alt="">-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<img class=" img-responsive" ng-src="{{i.imgextra[0].imgsrc}}" alt="">-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<img class=" img-responsive" ng-src="{{i.imgextra[1].imgsrc}}" alt="">-->
+					<!--</li>-->
+				<!--</ul>-->
+			<!--</a>-->
+		<!--</div>-->
+
+	<!--</div>-->
+</div>
+<!--<div class="item-fa">-->
+	<!--<div class="update-up" data-id="updateUp">-->
+		<!--<span ng-if="updateUpInfo == 1"><span class="glyphicon glyphicon-gift"></span>下拉更新</span>-->
+		<!--<span ng-if="updateUpInfo == 2"><span class="glyphicon glyphicon-retweet"></span>释放更新</span>-->
+	<!--</div>-->
 
 	<!--news-list-->
-	<div class="item-c" style="height: {{size.windowW*548/1080}}px">
-		<!--<div class="item-c clearfix" style="height: auto">-->
-		<!-- Swiper -->
-		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<!--<div class="swiper-slide" >-->
-				<!---->
-				<!--</div>-->
-				<img class="swiper-slide"  ng-src="{{data[0].imgsrc}}" alt="">
-				<img class="swiper-slide"  ng-src="{{data[0].imgsrc}}" alt="">
 
-			</div>
-			<!-- Add Pagination -->
-			<div class="swiper-pagination "></div>
-		</div>
-	</div>
-	<div class="item" ng-repeat="i in data">
-		<!--<a href="#" ng-if="$index == 0">-->
-		<!--<img ng-src="{{i.imgsrc}}" alt="">-->
-		<!--</a>-->
-		<a class="item-n " style="cursor: pointer" ng-click="showDetail(i.docid)" ng-if="$index != 0 && !i.imgextra">
-			<img class="i img-responsive" ng-src="{{i.imgsrc}}" alt="">
-			<div class="c">
-				<h4 class="h text-justify">{{i.title}}</h4>
-				<span class="p">{{i.ptime | ptime}}</span>
-				<span class="r"><span
-						class="glyphicon glyphicon-edit"></span>&nbsp; {{i.replyCount | replyCount}}</span>
-			</div>
-		</a>
-		<a class="item-m " ng-click="showDetail()"  ng-if="$index != 0 && i.imgextra">
-			<h4 class="h text-justify">{{i.title}}</h4>
-			<ul class="u list-unstyled clearfix">
-				<li>
-					<img class=" img-responsive" ng-src="{{i.imgsrc}}" alt="">
-				</li>
-				<li>
-					<img class=" img-responsive" ng-src="{{i.imgextra[0].imgsrc}}" alt="">
-				</li>
-				<li>
-					<img class=" img-responsive" ng-src="{{i.imgextra[1].imgsrc}}" alt="">
-				</li>
-			</ul>
-		</a>
-	</div>
-	<div class="update-down" data-id="updateDown">
-		<span class="glyphicon glyphicon-refresh"></span>
-	</div>
-</div>
-<div class="xinwen-detail slide-animate" ui-view name="xinwenDetail"></div>
+	<!--<div class="update-down" data-id="updateDown">-->
+		<!--<span class="glyphicon glyphicon-refresh"></span>-->
+	<!--</div>-->
+<!--</div>-->
+<!--<div class="xinwen-detail slide-animate" ui-view name="xinwenDetail"></div>-->
 

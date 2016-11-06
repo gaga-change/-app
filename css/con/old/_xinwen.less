@@ -1,0 +1,43 @@
+/*
+  com-xinwen
+    xinwen-header
+      header-con
+        header-top
+        header-bottom
+        slide-down
+    xinwen-list
+  xinwen-detail
+
+*/
+.com-xinwen {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  .xinwen-header {
+    position:fixed;
+    top: 0;
+    width: 100%;
+    //background-color: #0f0f0f;
+    z-index: 10;
+    transition: all 1s ease;
+  }
+  .xinwen-list {
+  }
+}
+.xinwen-header.hide-half {
+  height: 7.5%!important;
+  .header-top {
+    height: 0%;
+  }
+  .header-bottom {
+    height: 100%;
+  }
+  .slide-down {
+    &.bounceInDown {
+      height: 1400%;
+    }
+    &.bounceOutRight {
+      height: 1400%;
+    }
+  }
+}

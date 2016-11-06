@@ -13,7 +13,8 @@ var app = angular.module('wyApp', [
     "ui.router"
 ])
 
-    .controller('wyCtrl', ['$scope', function ($scope) {
+    .controller('WyCtrl', ['$scope', function ($scope) {
+        $scope.footerUrl = 'com/content-footer.html';
         $scope.size = {
             windowH: $(window).height(),
             windowW: $(window).width()
@@ -26,10 +27,6 @@ var app = angular.module('wyApp', [
                 };
             })
         });
-        $scope.component = {
-            header: 'inc/header.html',
-            footer: 'inc/footer.html'
-        };
         $scope.barList = [
             // {name : '头条'},
             {name: '精选', ename: 'jinxuan', url: 'T1467284926140'},
@@ -63,153 +60,176 @@ var app = angular.module('wyApp', [
             // {name: '美女'},
         ]
     }])
-    .controller('ContentCtrl', ['$scope', '$location', function ($scope, $location) {
-        //判断当前的状态,给相应的初始值
-        var dataId = $location.url().split('/')[2];
-        $('[data-id = ' + dataId + ']').addClass('active');
-        $scope.footerBar = function (e) {
-            var t = $(e.currentTarget);
-            t.addClass('active');
-            t.siblings().removeClass('active');
-        }
+
+    .controller('FooterCtrl', ['$scope', function ($scope) {
+        $scope.test = 1231232;
     }])
+
     .controller('XinwenCtrl', ['$scope', function ($scope) {
-        $scope.xinwenDetailUrl = 'com/xinwen-detail.html';
-        $scope.detailShow = false;
-        /**
-         * 设置下拉按钮
-         *  点击,下拉菜单全屏
-         *      给按钮下点击事件
-         *  点击选项自动回收
-         *      给全屏div加点击事件
-         */
-        var isSlide = false;
-        $scope.slideDown = function () {
-            if (isSlide) {
-                $('[data-id = slideMenu]').removeClass('bounceInDown');
-                $('[data-id = slideMenu]').addClass('bounceOutRight');
-
-            } else {
-                $('[data-id = slideMenu]').addClass('bounceInDown');
-                $('[data-id = slideMenu]').removeClass('bounceOutRight');
-            }
-            isSlide = !isSlide;
-        };
-        $scope.slideUp = function () {
-            // $('[data-id = bounceInDown]').addClass('bounceInDown');
-        }
-        /**
-         * 设置点击显示新闻详情
-         */
-        $scope.showDetail = function (e,b) {
-            if(b){
-                $scope.detailShow = false;
-                return
-            }
-            console.log(e)
-            console.log('fd')
-            $scope.detailShow = true;
-            $(window).on('hashchange', function(e) {
-                e.preventDefault();
-                console.log('hashchange');
-            });
-        }
+        $scope.xinwenHeader = 'com/xinwen-header.html'
     }])
-    .controller('NewsListCtrl', ['$scope', '$stateParams', '$interval', function ($scope, $stateParams, $interval) {
+
+    .controller('XinwenHeaderCtrl', ['$scope', function ($scope) {
+
+    }])
+
+    .controller('XinwenListCtrl', ['$interval', '$stateParams', '$scope', function ($scope, $interval, $stateParams) {
         /*
-        * 1.监听,新闻的滚动,适当改变元素
-        * */
-        var xinwen = $('[data-id = comXinwen]');
-        var h = $('[data-id = xinwen-header]');
-        xinwen.on('scroll', scroll)
-        var interval ;
-        interval = $interval(function () {
-            // console.log('gaga')
-        },1000);
-        function scroll(e) {
-            // console.log(xinwen.scrollTop());
-            //划到一定长度,自动隐藏logo
-            if(xinwen.scrollTop() > $(window).height()*0.075){
-                h.addClass('hide-half');
-            }else {
-                h.removeClass('hide-half');
-            }
-        }
+         * 1.监听,新闻的滚动,适当改变元素
+         * */
+        // var xinwen = $('[data-id = comXinwen]');
+        // var h = $('[data-id = xinwen-header]');
+        // xinwen.on('scroll', scroll)
+        // var interval ;
+        // interval = $interval(function () {
+        //     // console.log('gaga')
+        // },1000);
+        // function scroll(e) {
+        //     // console.log(xinwen.scrollTop());
+        //     //划到一定长度,自动隐藏logo
+        //     if(xinwen.scrollTop() > $(window).height()*0.075){
+        //         h.addClass('hide-half');
+        //     }else {
+        //         h.removeClass('hide-half');
+        //     }
+        // }
 
         /*
-        * 2.控制器撤销时,关闭一切的监听和定时器
-        * */
-        $scope.$on('$destroy', function (evt, msg) {
-            $interval.cancel(interval);
-            xinwen.off('scroll')
-        });
-         /*
-        * 数据的请求
-        * */
-        var news = getIndex($scope.barList, {ename: $stateParams['newsList']});
-        console.log(news);
-        $scope.news = news;
-        $scope.data = [];
-        getData('down'); //第一次自己更新
+         * 2.控制器撤销时,关闭一切的监听和定时器
+         * */
+        // $scope.$on('$destroy', function (evt, msg) {
+        //     $interval.cancel(interval);
+        //     xinwen.off('scroll')
+        // });
+        /*
+         * 数据的请求
+         * */
+        console.log($stateParams)
+        // var news = getIndex($scope.barList, {ename: $stateParams['xinwenList']});
+        // console.log(news);
+        // $scope.news = news;
+        // $scope.data = [];
+        // getData('down'); //第一次自己更新
         //     //滚动条
-        var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            paginationClickable: true
-        });
+        // var swiper = new Swiper('.swiper-container', {
+        //     pagination: '.swiper-pagination',
+        //     paginationClickable: true
+        // });
         //更新当前数据  参数 为up上面  down 下面
-        function getData(updataMeth) {
-            /**
-             * 1.得到当前的新闻类别
-             * 2.得到当前新闻类别的缓存
-             * 3.更新缓存 (下拉更新  和 上划加载)
-             * 4.更新当前数据data
-             */
-            cache[news.ename] = cache[news.ename] || [];
-            //追加
-            if (updataMeth == 'down') {
-                /**
-                 * 根据条数获取响应的新闻
-                 */
-                // var s = parseInt((cache[news.ename].length) / 10) * 10;
-                d(0, 20, function (list) {
-                    cache[news.ename] = cache[news.ename].concat(list);
-                    // console.log($scope.data)
-                    $scope.$apply(function () {
-                        $scope.data = cache[news.ename];
-                    })
-                })
-            }
-            function d(s, n, callBack) {
-                var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/" + s + "-" + n + ".html";
-                $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
-                    var d = data.data;
-                    var list = JSON.parse(data.data)[news.url];
-                    console.log('post获取的数据', list)
-                    list.map(function (ele, index) {
-                        var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
-                        var result = re.exec(ele.imgsrc);
-                        // if(result[2] == null) return;
-                        if (index == 0) {
-                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
-                            return;
-                        } else if (ele['imgextra']) {
-                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
-                            return;
-                        } else {
-                            ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
-                        }
-                    });
-                    callBack(list);
-                });
-            }
-        }
+        // function getData(updataMeth) {
+        //     /**
+        //      * 1.得到当前的新闻类别
+        //      * 2.得到当前新闻类别的缓存
+        //      * 3.更新缓存 (下拉更新  和 上划加载)
+        //      * 4.更新当前数据data
+        //      */
+        //     cache[news.ename] = cache[news.ename] || [];
+        //     //追加
+        //     if (updataMeth == 'down') {
+        //         /**
+        //          * 根据条数获取响应的新闻
+        //          */
+        //         // var s = parseInt((cache[news.ename].length) / 10) * 10;
+        //         d(0, 20, function (list) {
+        //             cache[news.ename] = cache[news.ename].concat(list);
+        //             // console.log($scope.data)
+        //             $scope.$apply(function () {
+        //                 $scope.data = cache[news.ename];
+        //             })
+        //         })
+        //     }
+        //     function d(s, n, callBack) {
+        //         var url = "http://c.3g.163.com/nc/article/list/" + news.url + "/" + s + "-" + n + ".html";
+        //         $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
+        //             var d = data.data;
+        //             var list = JSON.parse(data.data)[news.url];
+        //             console.log('post获取的数据', list)
+        //             list.map(function (ele, index) {
+        //                 var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
+        //                 var result = re.exec(ele.imgsrc);
+        //                 // if(result[2] == null) return;
+        //                 if (index == 0) {
+        //                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
+        //                     return;
+        //                 } else if (ele['imgextra']) {
+        //                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.322x2147483647.75.auto.webp'
+        //                     return;
+        //                 } else {
+        //                     ele.imgsrc = "http://s.cimg.163.com/pi/" + result[2] + '.270x2147483647.75.auto.webp';
+        //                 }
+        //             });
+        //             callBack(list);
+        //         });
+        //     }
+        // }
     }])
-    .controller('XinwenDetailCtrl', ['$scope', function ($scope) {
-        console.log('xinwendetailCtrl');
-        $scope.test = 'test';
-    }])
+
     .controller('ZhiboCtrl', ['$scope', function ($scope) {
     }])
+
+    .controller('HuatiCtrl', ['$scope', function ($scope) {
+    }])
+
+    .controller('WoCtrl', ['$scope', function ($scope) {
+    }])
+// .controller('ContentCtrl', ['$scope', '$location', function ($scope, $location) {
+//     //判断当前的状态,给相应的初始值
+//     var dataId = $location.url().split('/')[2];
+//     $('[data-id = ' + dataId + ']').addClass('active');
+//     $scope.footerBar = function (e) {
+//         var t = $(e.currentTarget);
+//         t.addClass('active');
+//         t.siblings().removeClass('active');
+//     }
+// }])
+// .controller('XinwenCtrl', ['$scope', function ($scope) {
+//     $scope.xinwenDetailUrl = 'com/xinwen-detail.html';
+//     $scope.detailShow = false;
+//     /**
+//      * 设置下拉按钮
+//      *  点击,下拉菜单全屏
+//      *      给按钮下点击事件
+//      *  点击选项自动回收
+//      *      给全屏div加点击事件
+//      */
+//     var isSlide = false;
+//     $scope.slideDown = function () {
+//         if (isSlide) {
+//             $('[data-id = slideMenu]').removeClass('bounceInDown');
+//             $('[data-id = slideMenu]').addClass('bounceOutRight');
+//
+//         } else {
+//             $('[data-id = slideMenu]').addClass('bounceInDown');
+//             $('[data-id = slideMenu]').removeClass('bounceOutRight');
+//         }
+//         isSlide = !isSlide;
+//     };
+//     $scope.slideUp = function () {
+//         // $('[data-id = bounceInDown]').addClass('bounceInDown');
+//     }
+//     /**
+//      * 设置点击显示新闻详情
+//      */
+//     $scope.showDetail = function (e,b) {
+//         if(b){
+//             $scope.detailShow = false;
+//             return
+//         }
+//         console.log(e)
+//         console.log('fd')
+//         $scope.detailShow = true;
+//         $(window).on('hashchange', function(e) {
+//             e.preventDefault();
+//             console.log('hashchange');
+//         });
+//     }
+// }])
+// .controller('XinwenDetailCtrl', ['$scope', function ($scope) {
+//     console.log('xinwendetailCtrl');
+//     $scope.test = 'test';
+// }])
+// .controller('ZhiboCtrl', ['$scope', function ($scope) {
+// }])
 
 
 // .controller('newListCtrl', ['$scope', '$routeParams', '$rootScope', '$interval', function ($scope, $routeParams, $rootScope, $interval) {

@@ -1,12 +1,4 @@
-<div class="com-content">
-	<div class="content-son slide-animate" ui-view name="contentSon" style="height: {{size.windowH*0.925}}px;width: 100%"></div>
-	<!--<div class="footer-space" style="height: {{size.windowH*0.075}}px;width: 100%"></div>-->
-	<footer class="footer-nav">
-		<ul class="footer-ul list-unstyled clearfix text-center" data-id="footerUl">
-			<li class=""  ng-click="footerBar($event)" data-id="xinwen"><a class="centerCenter"  ui-sref=".xinwen"><span class="glyphicon glyphicon-align-left"></span><br>新闻</a></li>
-			<li ng-click="footerBar($event)" data-id="zhibo"><a class="centerCenter"  ui-sref=".zhibo"><span class="glyphicon glyphicon-facetime-video" ></span><br>直播</a></li>
-			<li ng-click="footerBar($event)" data-id="huati"><a class="centerCenter" ui-sref=".huati" ><span class="glyphicon glyphicon-comment"></span><br>话题</a></li>
-			<li ng-click="footerBar($event)" data-id="wo"><a class="centerCenter" ui-sref=".wo"><span class="glyphicon glyphicon-user"></span><br>我</a></li>
-		</ul>
-	</footer>
+<div class="com-content" style="height: {{size.windowH}}px;" >
+	<div class="content-son" ui-view name="contentSon"></div>
+	<div class="footer" ng-include="footerUrl" ng-controller="FooterCtrl"></div>
 </div>
