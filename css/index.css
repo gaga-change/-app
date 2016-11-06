@@ -175,10 +175,15 @@
   width: auto;
   height: 100%;
 }
+.ul-list > li.active > a {
+  font-size: 1.8rem;
+  color: #e6e6e6;
+}
 .ul-list > li > a {
   height: 100%;
   font-size: 1.5rem;
-  color: #e6e6e6;
+  color: #e0c7ca;
+  text-decoration: none;
 }
 .ul-list > li:first-of-type {
   margin-left: 5%;

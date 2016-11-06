@@ -1,4 +1,4 @@
-<header class="xinwen-header " data-id="xinwen-header" style="height: {{size.windowH*0.15}}px;width: 100%">
+<header class="xinwen-header " data-id="xinwen-header" style="height: {{size.windowH*0.15}}px;width: 100%"  ng-controller="XinwenHeaderCtrl">
 	<div class="xinwen-header-con">
 		<div class="header-top padding-space centerCenter" data-id="headerTop">
 			<div class="i p "></div>
@@ -9,8 +9,8 @@
 			<div class="ul-l">
 				<div class="ul-fa">
 					<ul class="ul-list list-unstyled">
-						<li class="" ng-repeat="i in barList">
-							<a class="" href="#/index/xinwen/{{i.ename}}">{{i.name}}</a>
+						<li class="" ng-repeat="i in barList" ng-click="menuClick(i.ename)" data-id="{{i.ename}}">
+							<a class="" href="#/index/xinwen/{{i.ename}}" >{{i.name}}</a>
 						</li>
 					</ul>
 				</div>

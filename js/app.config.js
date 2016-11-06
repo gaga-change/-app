@@ -2,7 +2,6 @@
  * Created by qingyun2 on 16/11/4.
  */
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    console.log('??')
     var index = {
         name: 'index',
         url: "/index",
@@ -88,7 +87,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     $urlRouterProvider.otherwise('index/xinwen/jinxuan');
 }])
     .run(['$rootScope', '$state', function ($rootScope, $state) {
+        function addActive (str) {
+            var t =$("[data-id = "+str+"]");
+            console.log(t);
+            t.addClass('active');
+            t.siblings().removeClass('active');
+        }
         $rootScope.lastNewsList = 'jinxuan';
+
         $rootScope.$on('$stateChangeStart', function (evt, next, current) {
             /**
              * 如果回滚懂新闻,或者其它也好

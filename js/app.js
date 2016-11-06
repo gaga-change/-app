@@ -69,12 +69,33 @@ var app = angular.module('wyApp', [
         $scope.xinwenHeader = 'com/xinwen-header.html'
     }])
 
-    .controller('XinwenHeaderCtrl', ['$scope', function ($scope) {
-
+    .controller('XinwenHeaderCtrl', ['$scope', '$stateParams', '$interval', function ($scope, $stateParams, $interval) {
+        /**
+         * 点击菜单时,改变选中的样式
+         *
+         */
+        var str  = "";
+        if($stateParams['xinwenList']){
+            str = $stateParams['xinwenList'];
+        }
+        if(str == "")return;
+        var interval = $interval(function () {
+            if($("[data-id = " + str + "]").length ==1){
+                $interval.cancel(interval);
+                $("[data-id = " + str + "]").addClass('active')
+            }
+        },10);
+        $scope.menuClick = addActive;
+        function addActive(str) {
+            var t = $("[data-id = " + str + "]");
+            console.log(t);
+            t.addClass('active');
+            t.siblings().removeClass('active');
+        }
     }])
 
     .controller('XinwenListCtrl', ['$interval', '$rootScope', '$stateParams', '$scope', function ($interval, $rootScope, $stateParams, $scope) {
-        if(!$stateParams['xinwenList'])return;
+        if (!$stateParams['xinwenList'])return;
         /*
          * 1.监听,新闻的滚动,适当改变元素
          * */
@@ -106,7 +127,7 @@ var app = angular.module('wyApp', [
          * 数据的请求
          * */
         var news = getIndex($scope.barList, {ename: $stateParams['xinwenList']});
-        console.log(news);
+        // console.log(news);
 
         $scope.news = news;
         $scope.data = [];
@@ -144,7 +165,6 @@ var app = angular.module('wyApp', [
                 $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
                     var d = data.data;
                     var list = JSON.parse(data.data)[news.url];
-                    console.log('post获取的数据', list)
                     list.map(function (ele, index) {
                         var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
                         var result = re.exec(ele.imgsrc);
