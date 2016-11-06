@@ -12,7 +12,6 @@ var app = angular.module('wyApp', [
     'ngAnimate',
     "ui.router"
 ])
-
     .controller('WyCtrl', ['$scope', function ($scope) {
         $scope.footerUrl = 'com/content-footer.html';
         $scope.size = {
@@ -66,17 +65,17 @@ var app = angular.module('wyApp', [
          * 点击菜单时,改变选中的样式
          *
          */
-        var str  = "";
-        if($stateParams['footerBar']){
+        var str = "";
+        if ($stateParams['footerBar']) {
             str = $stateParams['footerBar'];
         }
-        if(str == "")return;
+        if (str == "")return;
         var interval = $interval(function () {
-            if($("[data-id = " + str + "]").length ==1){
+            if ($("[data-id = " + str + "]").length == 1) {
                 $interval.cancel(interval);
                 $("[data-id = " + str + "]").addClass('active')
             }
-        },10);
+        }, 10);
         $scope.menuClick = addActive;
         function addActive(e) {
             var t = $(e.currentTarget);
@@ -94,17 +93,17 @@ var app = angular.module('wyApp', [
          * 点击菜单时,改变选中的样式
          *
          */
-        var str  = "";
-        if($stateParams['xinwenList']){
+        var str = "";
+        if ($stateParams['xinwenList']) {
             str = $stateParams['xinwenList'];
         }
-        if(str == "")return;
+        if (str == "")return;
         var interval = $interval(function () {
-            if($("[data-id = " + str + "]").length ==1){
+            if ($("[data-id = " + str + "]").length == 1) {
                 $interval.cancel(interval);
                 $("[data-id = " + str + "]").addClass('active')
             }
-        },10);
+        }, 10);
         $scope.menuClick = addActive;
         function addActive(str) {
             var t = $("[data-id = " + str + "]");
@@ -249,7 +248,41 @@ var app = angular.module('wyApp', [
     .controller('ZhiboHeaderCtrl', ['$scope', function ($scope) {
     }])
 
-    .controller('ZhiboListCtrl', ['$scope', function ($scope) {
+    .controller('ZhiboListCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+        // http://data.live.126.net/livechannel/previewlist.json
+        var zhiboArr = [
+            {name: 'remen', url: 'previewlist', vname: 'live_review'}
+        ];
+        // console.log($stateParams);
+        var zb = getIndex(zhiboArr, {name: $stateParams['zhiboList']});
+        $scope.data = [];
+        getZhiboData('down')
+        /**
+         * 获取数据
+         */
+        function getZhiboData(dir) {
+            if (dir == 'down') {
+                var url = 'http://data.live.126.net/livechannel/' + zb.url + '.json';
+                $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
+                    // console.log(zb)
+                    // console.log(data.data);
+                    var d = JSON.parse(data.data);
+                    // console.log(d[zb.vname]);
+                    var list = d[zb.vname];
+                    list.map(function (ele, index) {
+                        var re = new RegExp(/^(http:\/\/)(.+)/, 'g')
+                        var result = re.exec(ele.image);
+                        // if(result[2] == null) return;
+                        ele.image = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
+                    });
+
+                    $scope.$apply(function () {
+                        $scope.data = list;
+                    })
+                })
+            }
+        }
+
 
     }])
 
