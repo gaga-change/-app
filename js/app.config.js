@@ -21,7 +21,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 templateUrl: 'com/xinwen.html',
                 controller: 'XinwenCtrl'
             }
-        }
+        },
+        params: {footerBar: 'xinwen'}
     };
     var newsList = {
         name: 'index.xinwen.list',
@@ -44,7 +45,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             }
         },
         params: {test: 1, id: 2}
-    }
+    };
     var zhibo = {
         name: 'index.zhibo',
         url: '/zhibo',
@@ -53,7 +54,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 templateUrl: 'com/zhibo.html',
                 controller: 'ZhiboCtrl'
             }
-        }
+        },
+        params: {footerBar: 'zhibo'}
     };
     var huati = {
         name: 'index.huati',
@@ -63,7 +65,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 templateUrl: 'com/huati.html',
                 controller: 'HuatiCtrl'
             }
-        }
+        },
+        params: {footerBar: 'huati'}
     };
     var wo = {
         name: 'index.wo',
@@ -73,7 +76,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 templateUrl: 'com/wo.html',
                 controller: 'WoCtrl'
             }
-        }
+        },
+        params: {footerBar: 'wo'}
     };
 
 

@@ -61,8 +61,28 @@ var app = angular.module('wyApp', [
         ]
     }])
 
-    .controller('FooterCtrl', ['$scope', function ($scope) {
-        $scope.test = 1231232;
+    .controller('FooterCtrl', ['$scope', '$stateParams', '$interval', function ($scope, $stateParams, $interval) {
+        /**
+         * 点击菜单时,改变选中的样式
+         *
+         */
+        var str  = "";
+        if($stateParams['footerBar']){
+            str = $stateParams['footerBar'];
+        }
+        if(str == "")return;
+        var interval = $interval(function () {
+            if($("[data-id = " + str + "]").length ==1){
+                $interval.cancel(interval);
+                $("[data-id = " + str + "]").addClass('active')
+            }
+        },10);
+        $scope.menuClick = addActive;
+        function addActive(e) {
+            var t = $(e.currentTarget);
+            t.addClass('active');
+            t.siblings().removeClass('active');
+        }
     }])
 
     .controller('XinwenCtrl', ['$scope', function ($scope) {
