@@ -1,3 +1,17 @@
+.slide-animate {
+  position: relative;
+  overflow: hidden;
+}
+.slide-animate.ng-enter {
+  position: absolute;
+  width: 100%;
+  animation: fadeInLeft 0.5s ease ;
+}
+.slide-animate.ng-leave {
+  position: absolute;
+  width: 100%;
+  animation: fadeOutRight 0.5s ease ;
+}
 .index-content-fa {
   width: 100%;
   background-color: #0f0f0f;
@@ -35,6 +49,8 @@
   overflow: hidden;
 }
 .com-content > .footer {
+  position: absolute;
+  bottom: 0;
   height: 7.5%;
   width: 100%;
   overflow: hidden;
@@ -66,8 +82,6 @@
 .xinwen-header {
   position: fixed;
   top: 0;
-  height: 15%;
-  width: 100%;
   background-color: rgba(153, 191, 74, 0.93);
   z-index: 888;
 }
