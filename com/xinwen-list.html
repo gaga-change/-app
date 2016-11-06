@@ -25,7 +25,7 @@
 		<!--<a href="#" ng-if="$index == 0">-->
 		<!--<img ng-src="{{i.imgsrc}}" alt="">-->
 		<!--</a>-->
-		<a class="item-n " style="cursor: pointer" ng-click="showDetail()" ng-if="$index != 0 && !i.imgextra">
+		<a class="item-n " style="cursor: pointer" ng-click="showDetail(i.docid)" ng-if="$index != 0 && !i.imgextra">
 			<img class="i img-responsive" ng-src="{{i.imgsrc}}" alt="">
 			<div class="c">
 				<h4 class="h text-justify">{{i.title}}</h4>
@@ -53,3 +53,5 @@
 		<span class="glyphicon glyphicon-refresh"></span>
 	</div>
 </div>
+<div class="xinwen-detail slide-animate" ui-view name="xinwenDetail"></div>
+

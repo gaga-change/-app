@@ -28,6 +28,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     templateUrl: 'com/xinwen-list.html',
                     controller: 'NewsListCtrl'
                 }
+                // xinwenDetail: {
+                //     templateUrl: 'com/xinwen-detail.html'
+                // }
+            }
+        })
+        .state('index.xinwen.list.gaga', {
+            url: "/:docid",
+            views: {
+                xinwenDetail: {
+                    templateUrl: 'com/xinwen-detail.html'
+                }
             }
         })
         .state('index.wo', {

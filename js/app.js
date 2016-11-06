@@ -106,8 +106,13 @@ var app = angular.module('wyApp', [
                 $scope.detailShow = false;
                 return
             }
+            console.log(e)
             console.log('fd')
             $scope.detailShow = true;
+            $(window).on('hashchange', function(e) {
+                e.preventDefault();
+                console.log('hashchange');
+            });
         }
     }])
     .controller('NewsListCtrl', ['$scope', '$stateParams', '$interval', function ($scope, $stateParams, $interval) {
