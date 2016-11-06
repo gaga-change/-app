@@ -73,6 +73,43 @@ var app = angular.module('wyApp', [
             t.siblings().removeClass('active');
         }
     }])
+    .controller('XinwenCtrl', ['$scope', function ($scope) {
+        $scope.xinwenDetailUrl = 'com/xinwen-detail.html';
+        $scope.detailShow = false;
+        /**
+         * 设置下拉按钮
+         *  点击,下拉菜单全屏
+         *      给按钮下点击事件
+         *  点击选项自动回收
+         *      给全屏div加点击事件
+         */
+        var isSlide = false;
+        $scope.slideDown = function () {
+            if (isSlide) {
+                $('[data-id = slideMenu]').removeClass('bounceInDown');
+                $('[data-id = slideMenu]').addClass('bounceOutRight');
+
+            } else {
+                $('[data-id = slideMenu]').addClass('bounceInDown');
+                $('[data-id = slideMenu]').removeClass('bounceOutRight');
+            }
+            isSlide = !isSlide;
+        };
+        $scope.slideUp = function () {
+            // $('[data-id = bounceInDown]').addClass('bounceInDown');
+        }
+        /**
+         * 设置点击显示新闻详情
+         */
+        $scope.showDetail = function (e,b) {
+            if(b){
+                $scope.detailShow = false;
+                return
+            }
+            console.log('fd')
+            $scope.detailShow = true;
+        }
+    }])
     .controller('NewsListCtrl', ['$scope', '$stateParams', '$interval', function ($scope, $stateParams, $interval) {
         /*
         * 1.监听,新闻的滚动,适当改变元素
@@ -85,7 +122,7 @@ var app = angular.module('wyApp', [
             // console.log('gaga')
         },1000);
         function scroll(e) {
-            console.log(xinwen.scrollTop());
+            // console.log(xinwen.scrollTop());
             //划到一定长度,自动隐藏logo
             if(xinwen.scrollTop() > $(window).height()*0.075){
                 h.addClass('hide-half');
@@ -162,32 +199,11 @@ var app = angular.module('wyApp', [
             }
         }
     }])
-    .controller('headerCtrl', ['$scope', function ($scope) {
-        /**
-         * 设置下拉按钮
-         *  点击,下拉菜单全屏
-         *      给按钮下点击事件
-         *  点击选项自动回收
-         *      给全屏div加点击事件
-         */
-        var isSlide = false;
-        $scope.slideDown = function () {
-            if (isSlide) {
-                $('[data-id = slideMenu]').removeClass('bounceInDown');
-                $('[data-id = slideMenu]').addClass('bounceOutRight');
-
-            } else {
-                $('[data-id = slideMenu]').addClass('bounceInDown');
-                $('[data-id = slideMenu]').removeClass('bounceOutRight');
-            }
-            isSlide = !isSlide;
-        };
-        $scope.slideUp = function () {
-            // $('[data-id = bounceInDown]').addClass('bounceInDown');
-        }
+    .controller('XinwenDetailCtrl', ['$scope', function ($scope) {
+        console.log('xinwendetailCtrl');
+        $scope.test = 'test';
     }])
     .controller('ZhiboCtrl', ['$scope', function ($scope) {
-
     }])
 
 

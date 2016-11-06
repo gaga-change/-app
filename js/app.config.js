@@ -16,7 +16,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             url: "/xinwen",
             views: {
                 contentSon: {
-                    templateUrl: 'com/xinwen.html'
+                    templateUrl: 'com/xinwen.html',
+                    controller: 'XinwenCtrl'
                 }
             }
         })
@@ -27,8 +28,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     templateUrl: 'com/xinwen-list.html',
                     controller: 'NewsListCtrl'
                 }
-            },
-            params: {test: 'dsa'}
+            }
         })
         .state('index.wo', {
             url: "/wo",

@@ -25,7 +25,7 @@
 		<!--<a href="#" ng-if="$index == 0">-->
 		<!--<img ng-src="{{i.imgsrc}}" alt="">-->
 		<!--</a>-->
-		<a class="item-n " ng-href="#!/docid/{{i.docid}}" ng-if="$index != 0 && !i.imgextra">
+		<a class="item-n " style="cursor: pointer" ng-click="showDetail()" ng-if="$index != 0 && !i.imgextra">
 			<img class="i img-responsive" ng-src="{{i.imgsrc}}" alt="">
 			<div class="c">
 				<h4 class="h text-justify">{{i.title}}</h4>
@@ -34,7 +34,7 @@
 						class="glyphicon glyphicon-edit"></span>&nbsp; {{i.replyCount | replyCount}}</span>
 			</div>
 		</a>
-		<a class="item-m " href="#" ng-if="$index != 0 && i.imgextra">
+		<a class="item-m " ng-click="showDetail()"  ng-if="$index != 0 && i.imgextra">
 			<h4 class="h text-justify">{{i.title}}</h4>
 			<ul class="u list-unstyled clearfix">
 				<li>
@@ -53,4 +53,3 @@
 		<span class="glyphicon glyphicon-refresh"></span>
 	</div>
 </div>
-

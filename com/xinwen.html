@@ -1,6 +1,6 @@
 <div class="com-xinwen" data-id="comXinwen">
 	<div style="height:{{size.windowH*0.15}}px; width: 100%" ></div>
-	<header class="xinwen-header " data-id="xinwen-header" ng-controller="headerCtrl" style="height:{{size.windowH*0.15}}px">
+	<header class="xinwen-header " data-id="xinwen-header" style="height:{{size.windowH*0.15}}px">
 		<div class="xinwen-header-con">
 			<div class="header-top padding-space centerCenter" data-id="headerTop">
 				<div class="i p "></div>
@@ -26,4 +26,6 @@
 		<div class="slide-down  animated" data-id="slideMenu"></div>
 	</header>
 	<div class="xinwen-list slide-animate" ui-view name="xinwenView"></div>
+	<div class="xinwen-detail" ng-if="detailShow" ng-include="xinwenDetailUrl"></div>
+
 </div>
