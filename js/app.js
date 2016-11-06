@@ -243,9 +243,25 @@ var app = angular.module('wyApp', [
     }])
 
     .controller('ZhiboCtrl', ['$scope', function ($scope) {
+        $scope.zhiboHeader = 'com/zhibo-header.html'
+    }])
+
+    .controller('ZhiboHeaderCtrl', ['$scope', function ($scope) {
+    }])
+
+    .controller('ZhiboListCtrl', ['$scope', function ($scope) {
+
     }])
 
     .controller('HuatiCtrl', ['$scope', function ($scope) {
+        $scope.huatiHeader = 'com/huati-header.html'
+    }])
+
+    .controller('HuatiListCtrl', ['$scope', function ($scope) {
+
+    }])
+
+    .controller('HuatiHeaderCtrl', ['$scope', function ($scope) {
     }])
 
     .controller('WoCtrl', ['$scope', function ($scope) {

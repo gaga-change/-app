@@ -57,6 +57,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         },
         params: {footerBar: 'zhibo'}
     };
+    var zhiboList = {
+        name: 'index.zhibo.list',
+        url: '/:zhiboList',
+        views: {
+            zhiboList: {
+                templateUrl: 'com/zhibo-list.html',
+                controller:"ZhiboListCtrl"
+            }
+        }
+    };
     var huati = {
         name: 'index.huati',
         url: '/huati',
@@ -67,6 +77,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             }
         },
         params: {footerBar: 'huati'}
+    };
+    var huatiList = {
+        name: 'index.huati.list',
+        url: '/:huatiList',
+        views: {
+            huatiList: {
+                templateUrl: 'com/huati-list.html',
+                controller:"HuatiListCtrl"
+            }
+        }
     };
     var wo = {
         name: 'index.wo',
@@ -88,6 +108,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     $stateProvider.state(wo);
     $stateProvider.state(newsList);
     $stateProvider.state(xinwenDetail);
+    $stateProvider.state(zhiboList);
+    $stateProvider.state(huatiList);
     $urlRouterProvider.otherwise('index/xinwen/jinxuan');
 }])
     .run(['$rootScope', '$state', function ($rootScope, $state) {

@@ -1,13 +1,5 @@
-<!--<div class="com-zh">-->
-	<!--<div class="zh-header ">-->
-		<!--<ul class=" list-unstyled">-->
-			<!--<li><a class="centerCenter" href="#">问吧</a></li>-->
-			<!--<li><a class="centerCenter" href="#">话题</a></li>-->
-			<!--<li><a class="centerCenter" href="#">关注</a></li>-->
-		<!--</ul>-->
-	<!--</div>-->
-	<!--<div class="zh-space"></div>-->
-	<!--<div class="zh-content" ui-view name="zhiboList"></div>-->
-<!--</div>-->
 
-huati
+
+<div class="zh-header" ng-include="huatiHeader" ng-controller="HuatiHeaderCtrl" style="height: {{size.windowH*0.075}}px"></div>
+
+<div class="zh-list" ui-view name="huatiList"></div>

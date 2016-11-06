@@ -12,11 +12,39 @@
   width: 100%;
   animation: fadeOutRight 0.5s ease ;
 }
+.zh-header {
+  position: fixed;
+  height: 7.5%;
+  width: 100%;
+  background-color: #FF3333;
+}
+.zh-ul {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+.zh-ul > li {
+  display: block;
+  float: left;
+  height: 100%;
+  padding: 0 1em;
+}
+.zh-ul > li > a {
+  height: 100%;
+  color: #d2b8bc;
+}
+.zh-list {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
 .index-content-fa {
   width: 100%;
   background-color: #0f0f0f;
 }
 .centerCenter,
+.zh-ul > li > a,
 .ul-list > li > a {
   display: -webkit-box;
   -webkit-box-orient: horizontal;
@@ -38,6 +66,9 @@
   box-orient: horizontal;
   box-pack: center;
   box-align: center;
+}
+.font-black {
+  color: #222;
 }
 .com-content {
   width: 100%;
