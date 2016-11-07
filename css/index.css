@@ -370,7 +370,8 @@ a.item-m .u li {
 }
 .item-zb {
   position: relative;
-  width: 100%;
+  width: 96%;
+  margin: 2% 2%;
   height: auto;
 }
 .item-zb .bg {
