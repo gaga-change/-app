@@ -349,3 +349,28 @@ a.item-m .u li {
   z-index: 999;
   background-color: rgba(68, 181, 255, 0.5);
 }
+.item-zb {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.item-zb .bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(22, 22, 22, 0.3);
+}
+.item-zb img {
+  max-width: 100%;
+}
+.item-zb .h {
+  position: absolute;
+  bottom: 3rem;
+  color: #e5dfdc;
+}
+.item-zb .s {
+  position: absolute;
+  bottom: 2rem;
+  color: #ede7e4;
+}

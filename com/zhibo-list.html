@@ -1,4 +1,12 @@
 <div style="width: 100%; height: {{size.windowH*0.075}}px"></div>
-<div class="" ng-repeat="i in data">
-	<img ng-src="{{i.image}}" alt="">
+<div class="item-zb" ng-repeat="i in data">
+	<a href="#">
+		<img ng-src="{{i.image}}" alt="">
+		<div class="bg"></div>
+		<p class="h">{{i.roomName}}</p>
+		<div class="s">
+			<span></span>
+			<span>{{i.userCount}}参与</span>
+		</div>
+	</a>
 </div>

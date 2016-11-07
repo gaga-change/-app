@@ -275,7 +275,7 @@ var app = angular.module('wyApp', [
                         // if(result[2] == null) return;
                         ele.image = "http://s.cimg.163.com/pi/" + result[2] + '.1080x2147483647.75.auto.webp'
                     });
-
+                    console.log(list)
                     $scope.$apply(function () {
                         $scope.data = list;
                     })
