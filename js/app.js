@@ -113,7 +113,7 @@ var app = angular.module('wyApp', [
         }
     }])
 
-    .controller('XinwenListCtrl', ['$interval', '$rootScope', '$stateParams', '$scope', function ($interval, $rootScope, $stateParams, $scope) {
+    .controller('XinwenListCtrl', ['$interval', '$rootScope', '$stateParams', '$scope', '$state', function ($interval, $rootScope, $stateParams, $scope, $state) {
         if (!$stateParams['xinwenList'])return;
         /*
          * 1.监听,新闻的滚动,适当改变元素
@@ -204,10 +204,15 @@ var app = angular.module('wyApp', [
         }
     }])
 
-    .controller('XinwenDetailCtrl', ['$scope', '$stateParams', '$sce', function ($scope, $stateParams, $sce) {
+    .controller('XinwenDetailCtrl', ['$scope', '$stateParams', '$sce', '$state', '$location', function ($scope, $stateParams, $sce, $state, $location) {
+        $scope.goBack = function () {
+            console.log($stateParams);
+            var url = '/index/' + $stateParams.footerBar + $stateParams.xinwenList;
+            $location.path(url);
+        }
         console.log('detail', $stateParams);
         $scope.xinwenDetailData = [];
-        // http://c.m.163.com/nc/article/C51TJCSH000181BT/full.html
+// http://c.m.163.com/nc/article/C51TJCSH000181BT/full.html
         var url = 'http://c.m.163.com/nc/article/' + $stateParams['docid'] + '/full.html';
         $.post('http://localhost:8080/tools/jsonp', {url: url}, function (data) {
             var d = data.data;

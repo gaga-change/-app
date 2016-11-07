@@ -3,11 +3,11 @@
 <!--{{test}}-->
 <!--</div>-->
 
-
 <div class="xinwen-detail">
 	<div class="header-back">
-		<a class="b"><span class="glyphicon glyphicon-arrow-left"></span></a>
+		<a class="b" ng-click="goBack()"><span class="glyphicon glyphicon-arrow-left"></span></a>
 	</div>
+	<div style="width: 100%; height: {{size.windowH*0.075}}px;"></div>
 	<div class="xinwen-detail-content" ng-bind-html='xinwenDetailData'></div>
 
 </div>
