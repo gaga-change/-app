@@ -113,14 +113,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     $urlRouterProvider.otherwise('index/xinwen/jinxuan');
 }])
     .run(['$rootScope', '$state', function ($rootScope, $state) {
-        function addActive (str) {
-            var t =$("[data-id = "+str+"]");
-            console.log(t);
-            t.addClass('active');
-            t.siblings().removeClass('active');
-        }
         $rootScope.lastNewsList = 'jinxuan';
-
+        $rootScope.lastZhiboList = 'remen';
+        $rootScope.lastHuatiList = 'wenba';
         $rootScope.$on('$stateChangeStart', function (evt, next, current) {
             /**
              * 如果回滚懂新闻,或者其它也好
@@ -136,14 +131,25 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             if (current['xinwenList']) {
                 $rootScope.lastNewsList = current['xinwenList'];
             }
+            if (current['zhiboList']) {
+                $rootScope.lastZhiboList = current['zhiboList'];
+            }
+            if (current['huatiList']) {
+                $rootScope.lastHuatiList = current['huatiList'];
+            }
         });
 
         // 过渡完成时触发这个事件
         $rootScope.$on('$stateChangeSuccess', function (evt, msg) {
-            //判断大项是否带子项
-            // console.log( 'msg',msg);
+            //如果大项没有带子类别,则跳转到上一次或默认的子类
             if (msg['url'] == '/xinwen') {
                 $state.go('index.xinwen.list', {xinwenList: $rootScope.lastNewsList})
+            }
+            if(msg['url'] == '/zhibo'){
+                $state.go('index.zhibo.list', {zhiboList: $rootScope.lastZhiboList})
+            }
+            if(msg['url'] == '/huati'){
+                $state.go('index.huati.list', {huatiList: $rootScope.lastHuatiList})
             }
         });
         // 状态过渡过程中发生错误时触发, 通常是模板不能被解析或者解析promise失败时触发
