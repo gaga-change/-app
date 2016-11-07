@@ -1,6 +1,17 @@
 <div style="width: 100%; height: {{size.windowH*0.075}}px"></div>
-<div ng-repeat="i in data">
-	<!--{{i.picurl}}-->
 
-	<img src="{{i.picurl}}" alt="">
+<div ng-if="data.length>1" class="item-fa" ng-repeat="d in data  ">
+	<a class="item-ht" href="#">
+		<div class="row1">
+			<img class="" src="{{d['headpicurl']}}" alt="">
+			<span class="sp"><span >{{d.name}}</span>| <span>{{d.title}}</span></span>
+		</div>
+		<img class="row2" src="{{d['picurl']}}" alt="">
+		<p class="row3">
+			{{d.alias}}
+		</p>
+		<div class="row4">
+			<span ><span class="cl">{{d.classification}}</span>| <span class="co">{{d.concernCount | replyCount}}关注</span>| <span class="qu">{{d.questionCount | replyCount}}提问</span></span>
+		</div>
+	</a>
 </div>

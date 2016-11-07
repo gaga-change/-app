@@ -45,4 +45,10 @@ angular.module('wyApp.ptimeFilter', [])
             }
             return text;
         }
-    });
+    })
+    .filter('test', function () {
+    return function (test) {
+        console.log('dddd',test);
+        return test;
+    }
+});
